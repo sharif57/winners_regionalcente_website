@@ -44,7 +44,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-[32px] bg-white">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ReusableHeader
@@ -55,7 +55,7 @@ export default function FaqSection() {
         />
 
         {/* FAQ List Container */}
-        <div className="bg-[#F9F9F9] p-4 md:p-12 lg:p-16 max-w-7xl mx-auto flex flex-col gap-4">
+        <div className="bg-[#F9F9F9] p-4 md:p-12 lg:p-16  flex flex-col gap-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
