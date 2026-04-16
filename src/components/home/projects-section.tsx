@@ -48,7 +48,7 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
-    <section className="py-24 bg-[#F9F9F9]">
+    <section className="py-[32px] bg-[#F9F9F9]">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ReusableHeader
@@ -59,11 +59,11 @@ export default function ProjectsSection() {
         />
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <div
               key={project.id}
-              className="bg-white group transition-all duration-300 hover:shadow-2xl overflow-hidden flex flex-col"
+              className="bg-[#E8E9EC52] group transition-all duration-300 hover:shadow-2xl overflow-hidden flex flex-col"
             >
               {/* Image with Badge */}
               <div className="relative h-64 overflow-hidden">
@@ -74,7 +74,7 @@ export default function ProjectsSection() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className={cn(
-                  "absolute top-4 right-4 px-4 py-1.5 text-xs font-bold text-white tracking-wider",
+                  "absolute top-4 right-0 px-4 py-1.5 text-xs font-bold text-white tracking-wider",
                   project.statusColor
                 )}>
                   {project.status}
@@ -82,15 +82,15 @@ export default function ProjectsSection() {
               </div>
 
               {/* Content */}
-              <div className="p-8 flex flex-col flex-grow space-y-6">
-                <h3 className="text-lg font-bold italic uppercase text-[#1A1A1A] leading-snug">
+              <div className="p-8 flex flex-col flex-grow space-y-2">
+                <h3 className="text-xl font-bold italic uppercase text-secondary max-w-xs leading-snug">
                   {project.title}
                 </h3>
 
-                <div className="flex items-center gap-6 border-y border-[#EEEEEE] py-4">
+                <div className="flex items-center gap-6 py-4">
                   <div className="space-y-1">
-                    <p className="text-[10px] uppercase tracking-widest text-[#666666] font-medium">INVESTMENT</p>
-                    <p className="text-lg font-bold text-[#1A1A1A]">{project.investment}</p>
+                    <p className="text-base font-normal uppercase tracking-widest text-[#696969]">INVESTMENT</p>
+                    <p className="text-xl font-bold text-secondary">{project.investment}</p>
                   </div>
                   {project.roi && (
                     <>
@@ -103,7 +103,7 @@ export default function ProjectsSection() {
                   )}
                 </div>
 
-                <p className="text-[#666666] text-sm leading-relaxed flex-grow">
+                <p className="text-[#696969] text-base font-normal leading-relaxed flex-grow">
                   {project.description}
                 </p>
 
@@ -111,10 +111,10 @@ export default function ProjectsSection() {
                   <Button
                     variant={project.buttonVariant === "ghost" ? "secondary" : "outline"}
                     className={cn(
-                      "w-full rounded-none py-6 font-bold tracking-widest text-xs transition-all duration-300",
-                      project.buttonVariant === "ghost" 
-                        ? "bg-[#94A3B8]/20 text-[#64748B] hover:bg-[#94A3B8]/30 cursor-not-allowed" 
-                        : "border-[#D1D1D1] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
+                      "w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300",
+                      project.buttonVariant === "ghost"
+                        ? "bg-[#94A3B8]/20 text-[#64748B] hover:bg-[#94A3B8]/30 cursor-not-allowed"
+                        : "border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white"
                     )}
                   >
                     {project.buttonLabel}

@@ -48,7 +48,7 @@ export default function HowItWorks() {
           {steps.map((step) => (
             <div
               key={step.number}
-              className="flex flex-col items-center text-center p-8 border border-[#989898] transition-all duration-300 hover:shadow-lg hover:border-primary/20 group h-full"
+              className="flex flex-col items-center text-center px-6 py-12 border border-[#989898] transition-all duration-300 hover:shadow-lg hover:border-primary/20 group h-full"
             >
               {/* Step Number Circle */}
               <div className="w-14 h-14 rounded-full border border-[#4C4C4C] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:border-primary group-hover:text-white">
