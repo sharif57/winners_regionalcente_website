@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { TrendingUp, BarChart3, Workflow, Coins, ClipboardCheck, Settings } from "lucide-react";
 import ReusableHeader from "@/hook/resuable-header";
 
@@ -49,7 +48,7 @@ const journeyColumns = [
 
 export default function JourneyFeatures() {
   return (
-    <section className="py-24 bg-[#0F172A]">
+    <section className="py-15 bg-[#0F172A]">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ReusableHeader
@@ -61,7 +60,7 @@ export default function JourneyFeatures() {
         />
 
         {/* Features Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 ">
           {journeyColumns.map((column, idx) => (
             <div
               key={idx}
@@ -70,7 +69,7 @@ export default function JourneyFeatures() {
               {/* Column Title with Line */}
               <div className="mb-10">
                 <div className="w-10 h-[2px] bg-white/40 mb-6" />
-                <h3 className="text-xl md:text-2xl font-bold italic text-white leading-tight">
+                <h3 className="text-xl md:text-2xl lg:text-2xl font-semibold italic text-white leading-tight">
                   {column.title}
                 </h3>
               </div>
@@ -80,16 +79,16 @@ export default function JourneyFeatures() {
                 {column.items.map((item, itemIdx) => (
                   <div key={itemIdx} className="flex gap-6 group">
                     {/* Icon Container */}
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#2D3E50] border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#14213D] border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
                       {item.icon}
                     </div>
 
                     {/* Text Content */}
                     <div className="space-y-2">
-                      <h4 className="text-lg font-bold text-white transition-colors group-hover:text-primary">
+                      <h4 className="text-xl font-medium text-white transition-colors group-hover:text-primary">
                         {item.header}
                       </h4>
-                      <p className="text-white/60 text-sm leading-relaxed max-w-md">
+                      <p className="text-[#BABABA] text-base font-normal leading-relaxed max-w-md">
                         {item.description}
                       </p>
                     </div>

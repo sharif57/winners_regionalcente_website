@@ -33,7 +33,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 bg-white">
+    <section className=" bg-white">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ReusableHeader
@@ -44,26 +44,26 @@ export default function HowItWorks() {
         />
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {steps.map((step) => (
             <div
               key={step.number}
-              className="flex flex-col items-center text-center p-8 border border-[#EEEEEE] transition-all duration-300 hover:shadow-lg hover:border-primary/20 group h-full"
+              className="flex flex-col items-center text-center p-8 border border-[#989898] transition-all duration-300 hover:shadow-lg hover:border-primary/20 group h-full"
             >
               {/* Step Number Circle */}
-              <div className="w-14 h-14 rounded-full border border-[#D1D1D1] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:border-primary group-hover:text-white">
-                <span className="text-xl font-bold text-[#1A1A1A] group-hover:text-white">
+              <div className="w-14 h-14 rounded-full border border-[#4C4C4C] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:border-primary group-hover:text-white">
+                <span className="text-2xl lg:text-[32px] font-semibold text-[#4C4C4C] group-hover:text-white">
                   {step.number}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-bold italic text-[#1A1A1A] mb-4 group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-medium italic text-secondary mb-4 group-hover:text-primary transition-colors">
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[#666666] text-sm leading-relaxed">
+              <p className="text-accent text-base font-normal leading-relaxed">
                 {step.description}
               </p>
             </div>

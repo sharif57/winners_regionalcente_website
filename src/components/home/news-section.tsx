@@ -39,7 +39,7 @@ const newsItems = [
 
 export default function NewsSection() {
   return (
-    <section className="py-20 bg-[#F9F9F9]">
+    <section className="py-[32px] bg-[#E8E9EC52]">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ReusableHeader
@@ -69,18 +69,18 @@ export default function NewsSection() {
               {/* Card Content */}
               <div className="p-8 flex flex-col flex-grow space-y-4">
                 {/* Metadata */}
-                <div className="flex justify-between items-center text-xs font-medium text-[#666666] tracking-wide">
+                <div className="flex justify-between items-center text-base font-normal text-accent tracking-wide">
                   <span>{item.date}</span>
                   <span>{item.readTime}</span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold italic text-[#1A1A1A] leading-snug group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold italic text-secondary leading-snug group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-[#666666] text-sm leading-relaxed flex-grow">
+                <p className="text-accent text-base font-normal  flex-grow">
                   {item.excerpt}
                 </p>
 
@@ -88,7 +88,7 @@ export default function NewsSection() {
                 <div className="pt-4">
                   <Link
                     href={item.href}
-                    className="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-[#1A1A1A] hover:text-primary transition-colors"
+                    className="inline-flex items-center justify-between gap-2 text-base w-full font-bold tracking-widest text-secondary hover:text-primary transition-colors"
                   >
                     READ ARTICLE
                     <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />

@@ -11,7 +11,7 @@ import ContactSection from "@/components/home/contact-section";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white space-y-[32px]">
       <Banner />
 
       {/* <section className="py-20"> */}
@@ -21,6 +21,9 @@ export default function Home() {
         description="At Winners Regional Center, we combine the stability of a USCIS-Approved framework with the ambition of global investors. We don't just facilitate visas, we bridge the gap between international capital and the booming Texas economy. Our mission is simple: Where Global Ambition Meets American Opportunity."
       />
       {/* </section> */}
+      <NewsSection />
+
+      <FeaturesSection />
 
       <JourneyFeatures />
 
@@ -30,9 +33,7 @@ export default function Home() {
 
       <ProjectsSection />
 
-      <FeaturesSection />
 
-      <NewsSection />
 
       <ContactSection />
 

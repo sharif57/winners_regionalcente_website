@@ -36,7 +36,7 @@ export default function ReusableHeader({
           {badge}
         </span>
 
-        <svg width="80" height="2" viewBox="0 0 80 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="mt-1" width="80" height="2" viewBox="0 0 80 2" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="40" cy="1" rx="40" ry="1" fill="#F65353" />
         </svg>
 
