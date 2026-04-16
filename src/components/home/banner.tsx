@@ -12,7 +12,7 @@ export default function Banner() {
     primaryButton,
     secondaryButton,
     backgroundImage,
-  } = useBanner();
+  } = useBanner("home");
 
   return (
     <section className="relative w-full min-h-[500px] lg:min-h-[800px] flex items-center overflow-hidden">

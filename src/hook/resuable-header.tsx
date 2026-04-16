@@ -4,9 +4,9 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 interface ReusableHeaderProps {
-  badge: string;
-  title: string;
-  description: string;
+  badge?: string;
+  title?: string;
+  description?: string;
   className?: string;
   titleClassName?: string;
   variant?: "light" | "dark";

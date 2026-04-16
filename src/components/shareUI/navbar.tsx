@@ -27,10 +27,8 @@ const navItems: NavItem[] = [
         label: "EB-5 Immigration",
         href: "#",
         dropdown: [
-            { label: "Program Overview", href: "#" },
-            { label: "Investment Process", href: "#" },
-            { label: "Project Portfolio", href: "#" },
-            { label: "Investor FAQ", href: "#" },
+            { label: "Steps in the EB-5 Process", href: "/eb-5-visa" },
+            { label: "Our Projects", href: "#" },
         ],
     },
     { label: "Wealth Management", href: "#" },
@@ -67,8 +65,8 @@ export default function Navbar() {
                                     key={item.label}
                                     href={item.href}
                                     className={`inline-flex items-center gap-1 text-base leading-none transition-colors ${item.active
-                                            ? "font-bold text-[#1f1f1f]"
-                                            : "font-normal text-[#1f1f1f] hover:text-[#b91d1d]"
+                                        ? "font-bold text-[#1f1f1f]"
+                                        : "font-normal text-[#1f1f1f] hover:text-[#b91d1d]"
                                         }`}
                                 >
                                     <span className="relative pb-[7px]">
