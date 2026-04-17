@@ -28,10 +28,10 @@ const navItems: NavItem[] = [
         href: "#",
         dropdown: [
             { label: "Steps in the EB-5 Process", href: "/eb-5-visa" },
-            { label: "Our Projects", href: "#" },
+            { label: "Our Projects", href: "/eb-5-visa/our-project" },
         ],
     },
-    { label: "Wealth Management", href: "#" },
+    { label: "Wealth Management", href: "/wealth-management" },
     { label: "FAQ", href: "#" },
 ];
 

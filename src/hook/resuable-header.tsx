@@ -26,7 +26,31 @@ export default function ReusableHeader({
     <div className={cn("flex flex-col items-center text-center space-y-4 max-w-5xl mx-auto px-6 py-10", className)}>
       {/* Badge with Red Swoosh */}
       {/* Badge with Red Swoosh */}
-      <div className="relative inline-flex flex-col items-center">
+      {/* Badge with Red Swoosh */}
+      {badge && (
+        <div className="relative inline-flex flex-col items-center">
+          <span
+            className={cn(
+              "text-base font-normal tracking-widest uppercase",
+              isDark ? "text-white/80" : "text-[#121E38]"
+            )}
+          >
+            {badge}
+          </span>
+
+          <svg
+            className="mt-1"
+            width="80"
+            height="2"
+            viewBox="0 0 80 2"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <ellipse cx="40" cy="1" rx="40" ry="1" fill="#F65353" />
+          </svg>
+        </div>
+      )}
+      {/* <div className="relative inline-flex flex-col items-center">
         <span
           className={cn(
             "text-base font-normal tracking-widest uppercase",
@@ -40,7 +64,7 @@ export default function ReusableHeader({
           <ellipse cx="40" cy="1" rx="40" ry="1" fill="#F65353" />
         </svg>
 
-      </div>
+      </div> */}
 
       {/* Main Title - Italic & Bold */}
       <h2

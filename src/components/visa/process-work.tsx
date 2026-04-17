@@ -30,7 +30,7 @@ interface Phase {
     title: string;
     description: string;
     steps: Step[];
-    variant: "navy" | "red";
+    variant: "#14213D" | "red";
     reverse?: boolean;
     icon: React.ReactNode;
 }
@@ -40,7 +40,7 @@ const phases: Phase[] = [
         id: "01",
         title: "Preparation & Onboarding",
         description: "Initial legal selection and document review to establish a solid foundation for your petition.",
-        variant: "navy",
+        variant: "#14213D",
         icon: <UserCheck className="w-5 h-5 text-[#F65353]" />,
         steps: [
             { label: "Hire Immigration Attorney", icon: <CheckCircle2 className="w-4 h-4 text-gray-400" /> },
@@ -68,7 +68,7 @@ const phases: Phase[] = [
         id: "03",
         title: "Funds Deployment & Petitions Filling",
         description: "The pivotal moment where capital enters the project and legal petitions are formalized with USCIS.",
-        variant: "navy",
+        variant: "#14213D",
         icon: <HelpingHand className="w-5 h-5 text-[#F65353]" />,
         steps: [
             {
@@ -87,7 +87,7 @@ const phases: Phase[] = [
         id: "04",
         title: "Visa & Conditional Residency",
         description: "Transitioning to U.S. residency status through consular processing or adjustment.",
-        variant: "navy",
+        variant: "#14213D",
         reverse: true,
         icon: <Plane className="w-5 h-5 text-[#F65353]" />,
         steps: [
@@ -132,7 +132,7 @@ export default function ProcessWork() {
                             className={`flex items-center justify-center w-full lg:w-[150px] py-10 lg:py-0 ${phase.variant === "red" ? "bg-[#F65353]" : "bg-[#121E38]"
                                 }`}
                         >
-                            <span className="text-[64px] font-bold text-white/20 select-none">
+                            <span className="text-[36px] font-medium text-white select-none">
                                 {phase.id}
                             </span>
                         </div>
@@ -141,11 +141,11 @@ export default function ProcessWork() {
                         <div className="flex-1 p-8 lg:p-12">
                             <div className="flex items-center gap-3 mb-4">
                                 {phase.icon}
-                                <h3 className="text-xl lg:text-2xl font-bold text-[#1F1F1F]">
+                                <h3 className="text-xl lg:text-[28px] font-semibold text-[#4C4C4C]">
                                     {phase.title}
                                 </h3>
                             </div>
-                            <p className="text-[#696969] text-base lg:text-lg mb-8 max-w-2xl">
+                            <p className="text-[#4C4C4C] text-base lg:text-xl font-normal mb-8 max-w-2xl">
                                 {phase.description}
                             </p>
 
@@ -154,13 +154,13 @@ export default function ProcessWork() {
                                 {phase.steps.map((step, idx) => (
                                     <div
                                         key={idx}
-                                        className={`bg-white p-4 rounded-md shadow-sm flex items-start gap-4 transition-all hover:shadow-md ${step.status === "red-border" ? "border-l-4 border-[#F65353]" : ""
+                                        className={`bg-white p-4 rounded-md  flex items-start gap-4 transition-all hover:shadow-md ${step.status === "red-border" ? "border-l-4 border-[#F65353]" : ""
                                             } ${step.description ? "md:col-span-1" : ""}`}
                                     >
                                         <div className="mt-1 flex-shrink-0">{step.icon}</div>
                                         <div className="flex-1">
                                             <div className="flex items-center justify-between">
-                                                <h4 className="font-bold text-[#1F1F1F] text-sm lg:text-base leading-tight">
+                                                <h4 className="font-medium text-[#4C4C4C] text-sm lg:text-base leading-tight">
                                                     {step.label}
                                                 </h4>
                                                 {step.status === "CRUCIAL STEP" && (
@@ -183,15 +183,15 @@ export default function ProcessWork() {
                 ))}
 
                 {/* Important Note Footer */}
-                <div className="mt-16 bg-[#F2F2F2] rounded-sm p-10 text-center relative overflow-hidden group">
+                <div className="mt-16 bg-[#F2F2F2] p-10 text-center relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-full h-1 bg-[#F65353]" />
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#F65353] mb-6 transform transition-transform group-hover:rotate-12">
                         <Info className="w-6 h-6 text-[#F65353]" />
                     </div>
-                    <h4 className="text-xl lg:text-2xl font-bold text-[#1F1F1F] mb-4">
+                    <h4 className="text-xl lg:text-[28px] font-medium text-[#1F1F1F] mb-4">
                         Important Note: USCIS Processing Times
                     </h4>
-                    <p className="text-[#696969] text-sm lg:text-base max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-[#4C4C4C] text-sm lg:text-base font-normal max-w-4xl mx-auto leading-relaxed">
                         EB-5 processing times can fluctuate based on volume and country of origin. Elite Patriot provides updated quarterly reports and case tracking tools to keep our investors informed of their status in real-time. We recommend consultation with your designated legal counsel for the most current adjudication windows.
                     </p>
                 </div>

@@ -10,7 +10,7 @@ export default function ProcessCTA() {
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 hover:scale-105"
                 style={{ backgroundImage: `url('/image/background4.png')` }}
             >
-                <div className="absolute inset-0 bg-[#000A24]/80" />
+                <div className="absolute inset-0 bg-[#000A24]/90" />
             </div>
 
             {/* Content */}
@@ -22,7 +22,7 @@ export default function ProcessCTA() {
                     </h2>
 
                     {/* Subtitle */}
-                    <p className="text-white/80 text-base md:text-lg lg:text-[20px] max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-[#E9E9E9] text-base md:text-lg lg:text-[18px] font-medium max-w-3xl mx-auto leading-relaxed">
                         Partner with an institutional regional center that prioritizes transparency,
                         compliance, and your path to residency.
                     </p>
@@ -37,9 +37,9 @@ export default function ProcessCTA() {
 
                         <Button
                             variant="outline"
-                            className="w-full sm:w-auto bg-transparent border-white/30 text-white hover:bg-white/10 px-10 py-7 text-sm font-bold uppercase tracking-wider rounded-none transition-all duration-300 backdrop-blur-sm"
+                            className="w-full sm:w-auto bg-transparent border-white/30 text-white hover:bg-white/10 px-10 py-7 text-sm font-bold uppercase hover:text-white tracking-wider rounded-none transition-all duration-300 backdrop-blur-sm"
                         >
-                            <Link href="/contact">CONTACT ADVISOR</Link>
+                            <Link href="#">CONTACT ADVISOR</Link>
                         </Button>
                     </div>
                 </div>
