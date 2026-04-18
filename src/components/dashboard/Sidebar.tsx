@@ -49,7 +49,7 @@ export default function Sidebar() {
                             key={item.label}
                             href={item.href}
                             className={cn(
-                                "flex items-center gap-4 px-4 py-4 text-sm font-bold tracking-tight transition-all ",
+                                "flex items-center gap-4 px-4 py-4 text-base font-medium tracking-tight transition-all ",
                                 isActive
                                     ? "bg-[#434D64] text-white shadow-lg"
                                     : "text-[#696969] hover:bg-gray-50 hover:text-[#121E38]"

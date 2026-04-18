@@ -6,7 +6,7 @@ export default function AboutProjectCard() {
                 <h1 className="text-[34px] leading-tight font-semibold italic text-secondary sm:text-[36px]">
                     Winner tower at Milk - Dallas, Texas
                 </h1>
-                <span className="bg-[#4A556F] px-5 py-1 text-[16px] text-white sm:text-[30px]">
+                <span className="bg-[#4A556F] px-5 py-1 text-[16px] text-white sm:text-lg font-medium">
                     Active
                 </span>
             </div>

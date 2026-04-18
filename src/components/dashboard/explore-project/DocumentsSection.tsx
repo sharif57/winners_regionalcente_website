@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
 import { DocumentItem } from "./types";
+import Link from "next/link";
 
 type DocumentsSectionProps = {
     documents: DocumentItem[];
@@ -15,12 +16,13 @@ export default function DocumentsSection({ documents }: DocumentsSectionProps) {
                         <p className="mb-2 text-xl font-medium text-secondary font-semibold">{item.name}</p>
                         <p className="mb-3 text-base font-normal text-[#4C4C4C]">{item.type}</p>
                         <div className="flex items-center gap-2">
-                            <button
+                            <Link
+                                href="/dashboard/explore-project/1"
                                 type="button"
-                                className="flex-1 border border-[#C8C8CA] bg-[#F1F1F2] px-3 py-2 text-base font-bold text-[#121E38]"
+                                className="flex-1 border text-center border-[#C8C8CA] bg-[#F1F1F2] px-3 py-2 text-base font-bold text-[#121E38]"
                             >
                                 VIEW
-                            </button>
+                            </Link>
                             <button
                                 type="button"
                                 aria-label={`Download ${item.name}`}
