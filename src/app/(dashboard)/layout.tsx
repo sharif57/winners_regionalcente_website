@@ -8,7 +8,7 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex bg-[#F9FAFB] min-h-screen">
+        <div className="flex bg-[#E8E9EC] min-h-screen">
             {/* Sidebar */}
             <Sidebar />
 

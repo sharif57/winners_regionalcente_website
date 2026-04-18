@@ -34,9 +34,9 @@ export default function Sidebar() {
                 <Image
                     src="/image/authlogo.svg"
                     alt="Winners Regional Center"
-                    width={180}
-                    height={40}
-                    className="mx-auto"
+                    width={400}
+                    height={400}
+                    className="mx-auto size-[120px] h-auto"
                 />
             </div>
 

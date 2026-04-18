@@ -50,7 +50,7 @@ export default function PerformanceChart() {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-2xl font-semibold">Portfolio Performance</h2>
+          <h2 className="text-2xl font-semibold italic text-secondary">Portfolio Performance</h2>
         </div>
 
         {/* Toggle Buttons */}
