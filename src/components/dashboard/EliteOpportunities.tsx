@@ -1,89 +1,103 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-const opportunities = [
-    {
-        name: "Houston Commercial Tower Project",
-        investment: "$800k",
-        roi: "6%",
-        tag: "Hot Asset",
-        tagColor: "bg-[#F65353]",
-        image: "/image/project1.jpg"
-    },
-    {
-        name: "Houston Commercial Tower Project",
-        investment: "$800k",
-        roi: "6%",
-        tag: "Active",
-        tagColor: "bg-[#121E38]",
-        image: "/image/project1.jpg"
-    },
-    {
-        name: "Houston Commercial Tower Project",
-        investment: "$800k",
-        roi: "6%",
-        tag: "Limited",
-        tagColor: "bg-[#696969]",
-        image: "/image/project1.jpg"
-    },
+const projects = [
+ 
+  {
+    id: 3,
+    image: "/image/project-3.png",
+    status: "Active",
+    statusColor: "bg-[#14213D]",
+    title: "Dallas Mixed-Use Development",
+    investment: "$800k",
+    roi: "5.5%",
+    description: "Urban lifestyle development successfully funded by global investor.",
+    buttonLabel: "CLOSED",
+    buttonVariant: "ghost",
+  },
+  {
+    id: 3,
+    image: "/image/project-3.png",
+    status: "Active",
+    statusColor: "bg-[#14213D]",
+    title: "Dallas Mixed-Use Development",
+    investment: "$800k",
+    roi: "5.5%",
+    description: "Urban lifestyle development successfully funded by global investor.",
+    buttonLabel: "CLOSED",
+    buttonVariant: "ghost",
+  },
+  {
+    id: 3,
+    image: "/image/project-3.png",
+    status: "Active",
+    statusColor: "bg-[#14213D]",
+    title: "Dallas Mixed-Use Development",
+    investment: "$800k",
+    roi: "5.5%",
+    description: "Urban lifestyle development successfully funded by global investor.",
+    buttonLabel: "CLOSED",
+    buttonVariant: "ghost",
+  },
 ];
-
 export default function EliteOpportunities() {
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-1000">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 bg-white p-6">
             <h3 className="text-[#1F1F1F] text-xl font-bold italic">
                 Elite Opportunity
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {opportunities.map((opp, index) => (
+                {projects.map((project) => (
                     <div
-                        key={index}
-                        className="bg-white border border-gray-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500"
+                        key={project.id}
+                        className="bg-[#E8E9EC52] group transition-all duration-300 hover:shadow-2xl overflow-hidden flex flex-col"
                     >
-                        {/* Image Container */}
-                        <div className="relative h-56 w-full overflow-hidden bg-gray-200">
-                            <div className="w-full h-full bg-[#121E38]/20 group-hover:bg-transparent transition-all duration-700" />
+                        {/* Image with Badge */}
+                        <div className="relative h-64 overflow-hidden">
+                            <Image
+                                src={project.image}
+                                alt={project.title}
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
                             <div className={cn(
-                                "absolute top-4 right-4 text-white text-[10px] font-bold px-4 py-2 uppercase rounded-sm z-10",
-                                opp.tagColor
+                                "absolute top-4 right-0 px-4 py-1.5 text-xs font-bold text-white tracking-wider",
+                                project.statusColor
                             )}>
-                                {opp.tag}
+                                {project.status}
                             </div>
                         </div>
 
                         {/* Content */}
-                        <div className="p-6 space-y-6">
-                            <h4 className="text-[#1F1F1F] text-[17px] font-bold italic leading-tight">
-                                {opp.name}
-                            </h4>
+                        <div className="p-8 flex flex-col flex-grow space-y-2">
+                            <h3 className="text-xl font-bold italic uppercase text-secondary max-w-xs leading-snug">
+                                {project.title}
+                            </h3>
 
-                            <div className="flex items-center justify-between border-t border-gray-50 pt-5">
-                                <div className="space-y-4">
-                                    <div className="space-y-1">
-                                        <p className="text-[#696969] text-[10px] font-bold uppercase tracking-wider">
-                                            Investment
-                                        </p>
-                                        <p className="text-[#1F1F1F] text-base font-bold italic">{opp.investment}</p>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <p className="text-[#696969] text-[10px] font-bold uppercase tracking-wider">
-                                            EST.ROI
-                                        </p>
-                                        <p className="text-[#F65353] text-base font-bold italic">{opp.roi}</p>
-                                    </div>
+                            <div className="flex items-center gap-6 py-4">
+                                <div className="space-y-1">
+                                    <p className="text-base font-normal uppercase tracking-widest text-[#696969]">INVESTMENT</p>
+                                    <p className="text-xl font-bold text-secondary">{project.investment}</p>
                                 </div>
-
-                                <Button
-                                    variant="outline"
-                                    className="border-[#BABABA] hover:border-[#F65353] hover:text-[#F65353] text-[#1F1F1F] px-6 py-5 text-[10px] font-black uppercase tracking-widest rounded-none transition-all"
-                                >
+                                {project.roi && (
+                                    <>
+                                        <div className="w-[2px] h-10 bg-[#000000]" />
+                                        <div className="space-y-1">
+                                            <p className="text-base uppercase tracking-widest text-[#=#696969] font-normal">EST.ROI</p>
+                                            <p className="text-lg font-bold text-[#EA4335]">{project.roi}</p>
+                                        </div>
+                                    </>
+                                )}
+                                <Button variant={"outline"} size="lg" className="ml-auto text-base font-bold text-[#121E38] rounded-none px-[24px] py-[12px] ">
                                     View Details
                                 </Button>
                             </div>
+
+
                         </div>
                     </div>
                 ))}
@@ -92,7 +106,4 @@ export default function EliteOpportunities() {
     );
 }
 
-// Helper for class merging if needed elsewhere, but using standard template literals here for specific opp props
-function cn(...classes: any[]) {
-    return classes.filter(Boolean).join(' ');
-}
+

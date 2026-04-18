@@ -11,8 +11,8 @@ const alerts = [
 
 export default function AlertList() {
     return (
-        <div className="bg-white p-6 lg:p-8 border border-gray-100 shadow-sm animate-in fade-in slide-in-from-right-5 duration-1000">
-            <h3 className="text-[#1F1F1F] text-xl font-bold italic mb-8">
+        <div className="bg-white p-6  animate-in fade-in slide-in-from-right-5 duration-1000">
+            <h3 className="text-[#1F1F1F]  text-lg lg:text-[28px] font-semibold italic mb-8">
                 Alerts
             </h3>
 
