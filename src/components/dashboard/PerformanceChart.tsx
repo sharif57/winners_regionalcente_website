@@ -1,86 +1,137 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+// Data
+const yearlyData = [
+  { year: "2020", value: 4200 },
+  { year: "2021", value: 5800 },
+  { year: "2022", value: 7100 },
+  { year: "2023", value: 6500 },
+  { year: "2024", value: 8200 },
+  { year: "2025", value: 8900 },
+  { year: "2026", value: 9500 },
+];
+
+const monthlyData = [
+  { month: "Jan", value: 6200 },
+  { month: "Feb", value: 6800 },
+  { month: "Mar", value: 7100 },
+  { month: "Apr", value: 6900 },
+  { month: "May", value: 7400 },
+  { month: "Jun", value: 8100 },
+  { month: "Jul", value: 8500 },
+  { month: "Aug", value: 8900 },
+  { month: "Sep", value: 9200 },
+  { month: "Oct", value: 8800 },
+  { month: "Nov", value: 9100 },
+  { month: "Dec", value: 9500 },
+];
 
 export default function PerformanceChart() {
-    const [view, setView] = useState<"Yearly" | "Monthly">("Yearly");
+  const [view, setView] = useState<"Yearly" | "Monthly">("Yearly");
 
-    return (
-        <div className="bg-white p-6 lg:p-8 border border-gray-100 shadow-sm animate-in fade-in slide-in-from-left-5 duration-1000">
-            <div className="flex items-center justify-between mb-10">
-                <h3 className="text-[#1F1F1F] text-xl font-bold italic">
-                    Portfolio Performance
-                </h3>
-                <div className="flex bg-[#F2F2F2] p-1 rounded-sm">
-                    {["Yearly", "Monthly"].map((mode) => (
-                        <button
-                            key={mode}
-                            onClick={() => setView(mode as any)}
-                            className={cn(
-                                "px-6 py-2 text-[11px] font-bold uppercase tracking-wider rounded-sm transition-all",
-                                view === mode
-                                    ? "bg-white text-[#1F1F1F] shadow-sm"
-                                    : "text-[#696969] hover:text-[#1F1F1F]"
-                            )}
-                        >
-                            {mode}
-                        </button>
-                    ))}
-                </div>
-            </div>
+  const data = view === "Yearly" ? yearlyData : monthlyData;
+  const xKey = view === "Yearly" ? "year" : "month";
 
-            {/* Custom SVG Area Chart */}
-            <div className="relative h-64 w-full">
-                <svg
-                    viewBox="0 0 1000 300"
-                    className="w-full h-full preserve-3d"
-                    preserveAspectRatio="none"
-                >
-                    <defs>
-                        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#8DA8C8" stopOpacity="0.6" />
-                            <stop offset="100%" stopColor="#8DA8C8" stopOpacity="0" />
-                        </linearGradient>
-                    </defs>
 
-                    {/* Background Area */}
-                    <path
-                        d="M0,150 C100,100 200,200 300,150 C400,100 500,180 600,120 C700,60 800,200 900,100 L1000,50 L1000,300 L0,300 Z"
-                        fill="url(#chartGradient)"
-                    />
-
-                    {/* Main Line */}
-                    <path
-                        d="M0,150 C100,100 200,200 300,150 C400,100 500,180 600,120 C700,60 800,200 900,100 L1000,50"
-                        fill="none"
-                        stroke="#8DA8C8"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        className="animate-draw"
-                    />
-
-                    {/* Data Points */}
-                    <circle cx="600" cy="120" r="10" fill="#F65353" className="animate-pulse" />
-                </svg>
-
-                {/* Value Bubble */}
-                <div className="absolute top-[35%] left-[58%] -translate-x-1/2 -translate-y-full mb-2 group">
-                    <div className="bg-[#F65353] text-white text-[10px] font-bold px-3 py-1 rounded-sm shadow-lg animate-bounce">
-                        $8,900
-                    </div>
-                    <div className="w-1 h-3 bg-[#F65353] mx-auto opacity-40"></div>
-                </div>
-            </div>
-
-            {/* X-Axis Labels */}
-            <div className="flex justify-between mt-6 px-2">
-                {["2020", "2021", "2023", "2024", "2025", "2026"].map((year) => (
-                    <span key={year} className="text-[#696969] text-xs font-semibold">
-                        {year}
-                    </span>
-                ))}
-            </div>
+  return (
+    <div className="w-full  mx-auto bg-white text-[#1F1F1F] p-8 border border-gray-100">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h2 className="text-2xl font-semibold">Portfolio Performance</h2>
         </div>
-    );
+
+        {/* Toggle Buttons */}
+        <div className="flex bg-gray-100 rounded-xl p-1">
+          {["Yearly", "Monthly"].map((mode) => (
+            <button
+              key={mode}
+              onClick={() => setView(mode as "Yearly" | "Monthly")}
+              className={cn(
+                "px-6 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all",
+                view === mode
+                  ? "bg-white text-[#1F1F1F] shadow-sm"
+                  : "text-gray-500 hover:text-[#1F1F1F]"
+              )}
+            >
+              {mode}
+            </button>
+          ))}
+        </div>
+      </div>
+
+    
+      {/* Chart Area */}
+      <div className="h-[290px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
+          >
+            <defs>
+              <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#0650B1" stopOpacity={0.70} />
+                <stop offset="95%" stopColor="#F5F8FF" stopOpacity={0.95} />
+              </linearGradient>
+            </defs>
+
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+
+            <XAxis
+              dataKey={xKey}
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#6B7280", fontSize: 13 }}
+              dy={12}
+            />
+
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#6B7280", fontSize: 13 }}
+              tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
+            />
+
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "white",
+                border: "1px solid #E5E7EB",
+                borderRadius: "12px",
+                color: "#1F1F1F",
+                boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+              }}
+              formatter={(value: number) => [`$${value.toLocaleString()}`, "Portfolio Value"]}
+              labelStyle={{ color: "#6B7280" }}
+            />
+
+            <Area
+              type="natural"
+              dataKey="value"
+              stroke="#0650B1"
+              strokeWidth={4}
+              fill="url(#colorValue)"
+              activeDot={{
+                r: 7,
+                fill: "#0650B1",
+                stroke: "white",
+                strokeWidth: 3,
+              }}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
 }
