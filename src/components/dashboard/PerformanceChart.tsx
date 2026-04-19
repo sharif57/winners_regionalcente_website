@@ -14,35 +14,35 @@ import {
 
 // Data
 const yearlyData = [
-  { year: "2020", value: 4200 },
-  { year: "2021", value: 5800 },
-  { year: "2022", value: 7100 },
-  { year: "2023", value: 6500 },
-  { year: "2024", value: 8200 },
-  { year: "2025", value: 8900 },
-  { year: "2026", value: 9500 },
+  { label: "2020", value: 4200 },
+  { label: "2021", value: 5800 },
+  { label: "2022", value: 7100 },
+  { label: "2023", value: 6500 },
+  { label: "2024", value: 8200 },
+  { label: "2025", value: 8900 },
+  { label: "2026", value: 9500 },
 ];
 
 const monthlyData = [
-  { month: "Jan", value: 6200 },
-  { month: "Feb", value: 6800 },
-  { month: "Mar", value: 7100 },
-  { month: "Apr", value: 6900 },
-  { month: "May", value: 7400 },
-  { month: "Jun", value: 8100 },
-  { month: "Jul", value: 8500 },
-  { month: "Aug", value: 8900 },
-  { month: "Sep", value: 9200 },
-  { month: "Oct", value: 8800 },
-  { month: "Nov", value: 9100 },
-  { month: "Dec", value: 9500 },
+  { label: "Jan", value: 6200 },
+  { label: "Feb", value: 6800 },
+  { label: "Mar", value: 7100 },
+  { label: "Apr", value: 6900 },
+  { label: "May", value: 7400 },
+  { label: "Jun", value: 8100 },
+  { label: "Jul", value: 8500 },
+  { label: "Aug", value: 8900 },
+  { label: "Sep", value: 9200 },
+  { label: "Oct", value: 8800 },
+  { label: "Nov", value: 9100 },
+  { label: "Dec", value: 9500 },
 ];
 
 export default function PerformanceChart() {
   const [view, setView] = useState<"Yearly" | "Monthly">("Yearly");
 
   const data = view === "Yearly" ? yearlyData : monthlyData;
-  const xKey = view === "Yearly" ? "year" : "month";
+  const xKey = "label";
 
 
   return (
@@ -112,7 +112,7 @@ export default function PerformanceChart() {
                 color: "#1F1F1F",
                 boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
               }}
-              formatter={(value: number) => [`$${value.toLocaleString()}`, "Portfolio Value"]}
+              formatter={(value: any) => [`$${Number(value).toLocaleString()}`, "Portfolio Value"]}
               labelStyle={{ color: "#6B7280" }}
             />
 

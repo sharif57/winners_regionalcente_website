@@ -21,7 +21,7 @@ export default function Banner() {
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       >
-        <div className="absolute inset-0 bg-black/60 lg:bg-gradient-to-r lg:from-black/80 lg:to-transparent" />
+        <div className="absolute inset-0 bg-black/60 lg:bg-gradient-to-r lg:from-black/15 lg:to-transparent" />
       </div>
 
       {/* Content Container */}

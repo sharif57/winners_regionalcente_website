@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function ProjectCTA() {
     return (
@@ -34,20 +35,24 @@ export default function ProjectCTA() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300">
-                    <Button
-                        asChild
-                        className="w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none shadow-xl transform transition-all hover:scale-105"
+                    <Link 
+                        href="/investment"
+                        className={cn(buttonVariants({ 
+                            className: "w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none shadow-xl transform transition-all hover:scale-105 h-auto" 
+                        }))}
                     >
-                        <Link href="/investment">Start Investment</Link>
-                    </Button>
+                        Start Investment
+                    </Link>
 
-                    <Button
-                        asChild
-                        variant="outline"
-                        className="w-full sm:w-auto bg-transparent border-white/30 text-white hover:bg-white/10 px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none backdrop-blur-sm transition-all"
+                    <Link 
+                        href="/evaluation"
+                        className={cn(buttonVariants({ 
+                            variant: "outline",
+                            className: "w-full sm:w-auto bg-transparent border-white/30 text-white hover:bg-white/10 px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none backdrop-blur-sm transition-all h-auto" 
+                        }))}
                     >
-                        <Link href="/evaluation">Request Evaluation</Link>
-                    </Button>
+                        Request Evaluation
+                    </Link>
                 </div>
             </div>
         </section>
