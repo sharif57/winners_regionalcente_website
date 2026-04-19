@@ -10,7 +10,7 @@ export default function DocumentsSection({ documents }: DocumentsSectionProps) {
     return (
         <article className="rounded-md bg-[#E8E9EC52] p-4 sm:p-6">
             <h2 className="mb-4 text-2xl font-semibold text-secondary sm:text-4xl">Documents</h2>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4 sm:gap-4">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-2 sm:gap-4">
                 {documents.map((item) => (
                     <div key={item.name} className="rounded-md bg-white p-4">
                         <p className="mb-2 text-xl font-medium text-secondary font-semibold">{item.name}</p>

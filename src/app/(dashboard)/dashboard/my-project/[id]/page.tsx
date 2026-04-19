@@ -1,4 +1,3 @@
-
 import AboutProjectCard from "@/components/dashboard/explore-project/AboutProjectCard";
 import DocumentsSection from "@/components/dashboard/explore-project/DocumentsSection";
 import FundingProgressCard from "@/components/dashboard/explore-project/FundingProgressCard";
@@ -7,7 +6,6 @@ import ProjectTimelineCard from "@/components/dashboard/explore-project/ProjectT
 import TopStatsBar from "@/components/dashboard/explore-project/TopStatsBar";
 import { DocumentItem, TopStat } from "@/components/dashboard/explore-project/types";
 import ProjectHero from "@/components/visa/project/ProjectHero";
-import Link from "next/link";
 
 const topStats: TopStat[] = [
     { label: "TOTAL PROJECT VALUE", value: "$220M", sub: "" },
@@ -20,6 +18,8 @@ const topStats: TopStat[] = [
 const documents: DocumentItem[] = [
     { name: "Bushiness Plan", type: "PDF . 12MB" },
     { name: "Financial Report", type: "XLSX . 2.2MB" },
+    { name: "Legal Documents", type: "PDF .12MB" },
+    { name: "Agreement", type: "PDF .12MB" },
 ];
 
 export default function ExploreProject() {
@@ -39,20 +39,7 @@ export default function ExploreProject() {
                     <ProjectTimelineCard />
                 </div>
 
-                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 sm:gap-4 italic items-center">
-                    <div>
-                        <DocumentsSection documents={documents} />
-                    </div>
-                    <div className="space-y-[24px]">
-                        <h1 className="text-2xl font-semibold text-secondary sm:text-4xl text-center">Ready to take next step?</h1>
-                        <div className="flex items-center justify-center gap-4">
-                            <Link href="/dashboard/explore-project/investment">
-                                <button className=" inline-flex items-center justify-center bg-[#C91E1E] px-6 py-3 text-base font-bold text-white transition-colors hover:bg-[#AD1717] sm:text-base">START INVESTMENT</button>
-                            </Link>
-                            <button className=" inline-flex items-center justify-center text-secondary border px-6 py-3 text-base font-bold  transition-colors  sm:text-base">REQUEST EVALUATION</button>
-                        </div>
-                    </div>
-                </div>
+                <DocumentsSection documents={documents} />
             </section>
         </div>
     );

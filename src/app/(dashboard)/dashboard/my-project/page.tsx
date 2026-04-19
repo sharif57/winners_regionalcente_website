@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
 type ProjectStatus = "Active" | "Pending" | "Completed";
@@ -110,7 +111,7 @@ export default function ProjectPage() {
                             key={tab}
                             type="button"
                             onClick={() => setActiveTab(tab)}
-                            className={`text-[16px] leading-none italic transition-colors sm:text-[24px] font-semibold ${activeTab === tab ? "text-[#F65353]" : "text-secondary hover:text-[#DE6D70]"
+                            className={`text-[16px] leading-none italic transition-colors sm:text-[24px] font-normal ${activeTab === tab ? "text-[#F65353]" : "text-secondary hover:text-[#DE6D70]"
                                 }`}
                         >
                             {tab.toUpperCase()}
@@ -136,7 +137,7 @@ export default function ProjectPage() {
 
                                 <div className="flex-1">
                                     <div className="mb-4 flex  items-center justify-between gap-3">
-                                        <h3 className="max-w-[390px] text-xl leading-[1.18] font-black italic text-[#1F1F1F] uppercase sm:text-[25px]">
+                                        <h3 className="max-w-[390px] text-xl leading-[1.18] font-bold italic text-[#1F1F1F] uppercase sm:text-[25px]">
                                             {project.title}
                                         </h3>
                                         <span
@@ -173,12 +174,14 @@ export default function ProjectPage() {
                                         </div>
                                     </div>
 
-                                    <button
-                                        type="button"
-                                        className="w-full border border-[#C4C4C4] bg-white px-4 py-3 text-center text-[15px] font-bold text-[#1E2738] uppercase transition-colors hover:bg-white sm:text-[18px]"
-                                    >
-                                        View Details
-                                    </button>
+                                    <Link href={`/dashboard/my-project/${project.id}`}>
+                                        <button
+                                            type="button"
+                                            className="w-full border border-[#C4C4C4] bg-white px-4 py-3 text-center text-[15px] font-bold text-[#1E2738] uppercase transition-colors hover:bg-white sm:text-[18px]"
+                                        >
+                                            View Details
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </article>
