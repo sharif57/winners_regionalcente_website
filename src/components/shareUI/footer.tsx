@@ -225,7 +225,7 @@ export default function Footer() {
                     {/* ── Col 1: Brand Info ── */}
                     <div className="flex w-full flex-col gap-5 sm:w-auto sm:flex-1 sm:basis-60">
                         <Image
-                            src="/image/logo.svg"
+                            src="/image/Frame 12.png"
                             alt="The Winners Regional Center"
                             width={178}
                             height={52}
@@ -233,7 +233,7 @@ export default function Footer() {
                             className="h-auto w-[146px] sm:w-[160px] lg:w-[178px]"
                         />
 
-                        <p className="text-sm leading-relaxed text-[#8fa3bf]">
+                        <p className="text-sm leading-relaxed text-white">
                             We are a United States Immigration Services (USCIS) approved
                             Employment-Based Fifth Preference (EB-5) immigration investor
                             regional center for the State of Texas.
@@ -243,7 +243,7 @@ export default function Footer() {
                             <h3 className="font-['Playfair_Display'] text-base font-bold italic text-white">
                                 Address
                             </h3>
-                            <p className="text-sm text-[#8fa3bf]">
+                            <p className="text-sm text-white">
                                 1709 Martin Luther King Jr Blvd, Dallas, TX 75215.
                             </p>
                         </div>
@@ -254,7 +254,7 @@ export default function Footer() {
                             </h3>
                             <Link
                                 href="tel:12149168282"
-                                className="text-sm text-[#8fa3bf] transition-colors hover:text-[#b91d1d]"
+                                className="text-sm text-white transition-colors hover:text-[#b91d1d]"
                             >
                                 1-214-916-8282
                             </Link>
@@ -332,13 +332,26 @@ export default function Footer() {
                                 <Link
                                     key={label}
                                     href={href}
-                                    className="group flex items-center gap-2 text-sm text-[#8fa3bf] transition-colors hover:text-[#b91d1d]"
+                                    className="group flex items-center gap-2 text-sm text-white transition-colors hover:text-[#b91d1d]"
                                 >
                                     <span className="h-1.5 w-1.5 rounded-full bg-[#b91d1d] opacity-0 transition-opacity group-hover:opacity-100" />
                                     {label}
                                 </Link>
                             ))}
                         </nav>
+                        <div className="flex flex-col gap-1 space-y-5">
+                            <h3 className="font-['Playfair_Display'] text-xl font-normal italic text-white">
+                                Social
+                            </h3>
+                            <Image
+                                src="/image/Frame 12 (1).svg"
+                                alt="The Winners Regional Center"
+                                width={178}
+                                height={52}
+                                priority
+                                className="h-auto w-[146px] sm:w-[160px] lg:w-[178px]"
+                            />
+                        </div>
                     </div>
 
                 </div>
@@ -346,8 +359,8 @@ export default function Footer() {
 
             {/* ── Copyright Bar ── */}
             <div className="border-t border-[#2a3f5f] bg-[#0e1a2e] py-4">
-                <p className="text-center text-sm text-[#8fa3bf]">
-                    © 2026 The Winners Regional Center. All Rights Reserved.
+                <p className="text-center text-sm text-white">
+                    © {new Date().getFullYear()} The Winners Regional Center. All Rights Reserved.
                 </p>
             </div>
 

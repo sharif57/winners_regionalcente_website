@@ -27,7 +27,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="">
+    <section className="py-[32px]">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ReusableHeader
