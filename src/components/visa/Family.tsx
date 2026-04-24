@@ -1,5 +1,7 @@
 "use client"
 
+import { requestFocus } from '@/redux/features/helper/focusSlice'
+import { useAppDispatch } from '@/redux/hooks'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -160,7 +162,7 @@ function SectionBlock({ section }: { section: Section }) {
 // ── Main Component ───────────────────────────────────────────────────────────
 
 export default function Family() {
-    const router = useRouter()
+    const dispatch = useAppDispatch()
 
     return (
         <div>
@@ -174,7 +176,7 @@ export default function Family() {
                     <h2 className="mb-10 text-2xl font-semibold italic leading-tight text-secondary sm:text-3xl lg:text-[28px]">
                         Begin your EB-5 journey to US Permanent Residency for your family by getting expert advice.
                     </h2>
-                    <button onClick={() => router.push('/#reachout')} className="bg-primary px-12 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#9f1717] sm:text-base">
+                    <button onClick={() => dispatch(requestFocus("reachout"))} className="bg-primary px-12 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#9f1717] sm:text-base">
                         REACHOUT NOW
                     </button>
                 </div>
