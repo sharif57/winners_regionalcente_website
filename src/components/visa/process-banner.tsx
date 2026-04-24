@@ -3,6 +3,7 @@
 import { useBanner } from "@/hook/use-banner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function ProcessBanner() {
     const {
@@ -49,7 +50,9 @@ export default function ProcessBanner() {
                         <Button
                             className="w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-10 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105 border-none"
                         >
-                            <Link href={primaryButton.href}>{primaryButton.label}</Link>
+                            <Link href={primaryButton.href}>
+                                {primaryButton.label}
+                            </Link>
                         </Button>
 
                     </div>

@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { requestFocus } from "@/redux/features/helper/focusSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 export default function ProjectCTA() {
+    const dispatch = useAppDispatch();
+
     return (
         <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-[#0A1224]">
             {/* Wave/Arc Background Pattern (SVG) */}
@@ -35,24 +37,29 @@ export default function ProjectCTA() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300">
-                    <Link 
-                        href="/investment"
-                        className={cn(buttonVariants({ 
-                            className: "w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none shadow-xl transform transition-all hover:scale-105 h-auto" 
+                    <Button
+                        className={cn(buttonVariants({
+                            className: "w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none shadow-xl transform transition-all hover:scale-105 h-auto"
                         }))}
                     >
                         Start Investment
-                    </Link>
+                    </Button>
 
-                    <Link 
-                        href="/evaluation"
-                        className={cn(buttonVariants({ 
+                    <Button
+                        onClick={() => {
+                            dispatch(requestFocus("reachout"));
+                            window.scrollBy({
+                                top: 260,
+                                behavior: "smooth",
+                            });
+                        }}
+                        className={cn(buttonVariants({
                             variant: "outline",
-                            className: "w-full sm:w-auto bg-transparent border-white/30 text-white hover:bg-white/10 px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none backdrop-blur-sm transition-all h-auto" 
+                            className: "w-full sm:w-auto bg-transparent border-white/30 text-white hover:bg-white/10 px-12 py-8 text-base font-bold uppercase tracking-widest rounded-none backdrop-blur-sm transition-all h-auto"
                         }))}
                     >
                         Request Evaluation
-                    </Link>
+                    </Button>
                 </div>
             </div>
         </section>

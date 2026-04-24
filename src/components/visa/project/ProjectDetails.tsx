@@ -2,6 +2,7 @@
 
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function ProjectDetails() {
     return (
@@ -39,8 +40,9 @@ export default function ProjectDetails() {
 
                         <div className="pt-6">
                             <Button
+                                onClick={() => toast.warning("The Agreement file will be install, after doing the application backend.")}
                                 variant="outline"
-                                className="w-full  border-[#BABABA] hover:border-[#1F1F1F] text-[#1F1F1F] px-10 py-7 text-sm font-bold uppercase tracking-widest rounded-none transition-all duration-300 group"
+                                className="w-full border-[#BABABA] hover:border-[#1F1F1F] text-[#1F1F1F] px-10 py-7 text-sm font-bold uppercase tracking-widest rounded-none transition-all duration-300 group"
                             >
                                 <span>See Agreement</span>
                                 <Download className="ml-3 w-5 h-5 group-hover:translate-y-1 transition-transform" />

@@ -1,5 +1,7 @@
+"use client"
+
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/navigation'
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -158,6 +160,8 @@ function SectionBlock({ section }: { section: Section }) {
 // ── Main Component ───────────────────────────────────────────────────────────
 
 export default function Family() {
+    const router = useRouter()
+
     return (
         <div>
             {sections.map((section) => (
@@ -170,7 +174,7 @@ export default function Family() {
                     <h2 className="mb-10 text-2xl font-semibold italic leading-tight text-secondary sm:text-3xl lg:text-[28px]">
                         Begin your EB-5 journey to US Permanent Residency for your family by getting expert advice.
                     </h2>
-                    <button className="bg-primary px-12 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#9f1717] sm:text-base">
+                    <button onClick={() => router.push('/#reachout')} className="bg-primary px-12 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#9f1717] sm:text-base">
                         REACHOUT NOW
                     </button>
                 </div>

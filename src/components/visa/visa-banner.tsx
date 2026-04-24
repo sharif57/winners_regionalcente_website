@@ -3,6 +3,7 @@
 import { useBanner } from "@/hook/use-banner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function VisaBanner() {
     const {
@@ -47,9 +48,13 @@ export default function VisaBanner() {
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-8 pt-4">
                         <Button
+                            onClick={() => toast.warning("It's download docs pdf, when completed backend/server phase.")}
+
                             className="w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-10 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105 border-none"
                         >
-                            <Link href={primaryButton.href}>{primaryButton.label}</Link>
+                            {/* <Link href={primaryButton.href}> */}
+                            {primaryButton.label}
+                            {/* </Link> */}
                         </Button>
 
                     </div>

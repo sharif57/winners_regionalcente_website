@@ -1,12 +1,34 @@
 "use client";
 
+import { clearFocus } from "@/redux/features/helper/focusSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 export default function Footer() {
     const [formData, setFormData] = useState({ name: "", email: "", note: "" });
     const [submitted, setSubmitted] = useState(false);
+
+    const { target, requestId } = useAppSelector((state) => state.focus);
+    const dispatch = useAppDispatch();
+
+    const nameInputRef = useRef<HTMLInputElement | null>(null);
+
+
+    useEffect(() => {
+        if (!target) return;
+
+        const timer = window.setTimeout(() => {
+            if (target === "reachout") {
+                nameInputRef.current?.focus();
+            }
+
+            dispatch(clearFocus());
+        }, 400);
+
+        return () => window.clearTimeout(timer);
+    }, [target, requestId, dispatch]);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,7 +46,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="w-full bg-[#121E38]">
+        <footer id="reachout" className="w-full bg-[#121E38]">
 
             {/* ── Main Content ── */}
             <div className="mx-auto w-full container     px-5 py-14 sm:px-8 lg:px-12">
@@ -80,6 +102,7 @@ export default function Footer() {
                             {/* Name + Email row */}
                             <div className="flex flex-col gap-3 sm:flex-row">
                                 <input
+                                    ref={nameInputRef}
                                     type="text"
                                     name="name"
                                     placeholder="Enter your full name"
@@ -130,7 +153,7 @@ export default function Footer() {
                         <h3 className="font-['Playfair_Display'] text-xl font-normal italic text-white">
                             Important Links
                         </h3>
-                        <div className="h-[2px] w-10 rounded-full bg-[#b91d1d]" />
+                        <div className="h-0.5 w-10 rounded-full bg-[#b91d1d]" />
 
                         <nav className="flex flex-col gap-2">
                             {[
