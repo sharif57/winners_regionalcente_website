@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -72,7 +73,7 @@ export default function PerformanceChart() {
         </div>
       </div>
 
-    
+
       {/* Chart Area */}
       <div className="h-[290px]">
         <ResponsiveContainer width="100%" height="100%">

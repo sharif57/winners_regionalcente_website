@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useBanner } from "@/hook/use-banner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -15,13 +14,13 @@ export default function Banner() {
   } = useBanner("home");
 
   return (
-    <section className="relative w-full min-h-[500px] lg:min-h-[800px] flex items-center overflow-hidden">
+    <section className="relative w-full min-h-125 lg:min-h-200 flex items-center overflow-hidden">
       {/* Background Image with Dark Overlay */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       >
-        <div className="absolute inset-0 bg-black/60 lg:bg-gradient-to-r lg:from-black/15 lg:to-transparent" />
+        <div className="absolute inset-0 bg-black/60 lg:bg-linear-to-r lg:from-black/15 lg:to-transparent" />
       </div>
 
       {/* Content Container */}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Lato } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -30,6 +31,8 @@ export default function RootLayout({
       className={`${lato.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Toaster position="top-right" />
+
         {children}
       </body>
     </html>

@@ -5,11 +5,14 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
 
+
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen font-sans">
+
+
             {/* Left Pane: Logo Section */}
             <div className="hidden lg:flex lg:w-[40%] bg-[#E8E9EC52] items-center justify-center p-12 relative">
                 {/* Back Button (Desktop) */}
