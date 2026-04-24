@@ -5,44 +5,45 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const projects = [
- 
-  {
-    id: 3,
-    image: "/image/project-3.png",
-    status: "Active",
-    statusColor: "bg-[#14213D]",
-    title: "Dallas Mixed-Use Development",
-    investment: "$800k",
-    roi: "5.5%",
-    description: "Urban lifestyle development successfully funded by global investor.",
-    buttonLabel: "CLOSED",
-    buttonVariant: "ghost",
-  },
-  {
-    id: 3,
-    image: "/image/project-3.png",
-    status: "Active",
-    statusColor: "bg-[#14213D]",
-    title: "Dallas Mixed-Use Development",
-    investment: "$800k",
-    roi: "5.5%",
-    description: "Urban lifestyle development successfully funded by global investor.",
-    buttonLabel: "CLOSED",
-    buttonVariant: "ghost",
-  },
-  {
-    id: 3,
-    image: "/image/project-3.png",
-    status: "Active",
-    statusColor: "bg-[#14213D]",
-    title: "Dallas Mixed-Use Development",
-    investment: "$800k",
-    roi: "5.5%",
-    description: "Urban lifestyle development successfully funded by global investor.",
-    buttonLabel: "CLOSED",
-    buttonVariant: "ghost",
-  },
+
+    {
+        id: 3,
+        image: "/image/project-3.png",
+        status: "Active",
+        statusColor: "bg-[#14213D]",
+        title: "Dallas Mixed-Use Development",
+        investment: "$800k",
+        roi: "5.5%",
+        description: "Urban lifestyle development successfully funded by global investor.",
+        buttonLabel: "CLOSED",
+        buttonVariant: "ghost",
+    },
+    {
+        id: 3,
+        image: "/image/project-3.png",
+        status: "Active",
+        statusColor: "bg-[#14213D]",
+        title: "Dallas Mixed-Use Development",
+        investment: "$800k",
+        roi: "5.5%",
+        description: "Urban lifestyle development successfully funded by global investor.",
+        buttonLabel: "CLOSED",
+        buttonVariant: "ghost",
+    },
+    {
+        id: 3,
+        image: "/image/project-3.png",
+        status: "Active",
+        statusColor: "bg-[#14213D]",
+        title: "Dallas Mixed-Use Development",
+        investment: "$800k",
+        roi: "5.5%",
+        description: "Urban lifestyle development successfully funded by global investor.",
+        buttonLabel: "CLOSED",
+        buttonVariant: "ghost",
+    },
 ];
+
 export default function EliteOpportunities() {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 bg-white p-6">
@@ -78,7 +79,7 @@ export default function EliteOpportunities() {
                                 {project.title}
                             </h3>
 
-                            <div className="flex items-center gap-6 py-4">
+                            <div className="flex flex-wrap items-center gap-6 py-4">
                                 <div className="space-y-1">
                                     <p className="text-base font-normal uppercase tracking-widest text-[#696969]">INVESTMENT</p>
                                     <p className="text-xl font-bold text-secondary">{project.investment}</p>
