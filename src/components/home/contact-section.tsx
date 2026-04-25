@@ -108,7 +108,7 @@ export default function ContactSection() {
 
           {/* Right Column: Image with Quote Overlay */}
           <div className="w-full lg:w-1/2">
-            <div className="relative mx-auto flex w-full max-w-[560px] items-center justify-center overflow-hidden rounded-sm bg-white lg:max-w-none">
+            <div className="relative mx-auto flex w-full max-w-140 items-center justify-center overflow-hidden rounded-sm bg-white lg:max-w-none">
               <Image
                 src="/image/journey.png"
                 alt="Start your journey"

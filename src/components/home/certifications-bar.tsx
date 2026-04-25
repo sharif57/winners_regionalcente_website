@@ -29,7 +29,7 @@ export default function CertificationsBar() {
     return (
         <section className="w-full bg-[#E8E9EC80] py-8 lg:py-10">
             <div className="container mx-auto ">
-                <div className="flex flex-wrap items-center justify-center lg:justify-between gap-6 lg:gap-4 lg:divide-x lg:divide-gray-300">
+                <div className="flex flex-wrap items-center lg:items-center justify-start lg:justify-between gap-6 lg:gap-4 lg:divide-x lg:divide-gray-300 pl-6 md:pl-0">
                     {certificates.map((cert) => (
                         <div
                             key={cert.label}
