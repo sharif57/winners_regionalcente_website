@@ -28,7 +28,7 @@ export default function Banner() {
         <div className="max-w-4xl space-y-8 animate-in fade-in slide-in-from-left-10 duration-1000">
 
           {/* Tagline */}
-          <p className="text-primary font-bold text-sm lg:text-base tracking-[0.2em] transform transition-all hover:translate-x-1">
+          <p className="text-primary font-bold text-sm lg:text-base tracking-[0.2em] transform transition-all hover:translate-x-1 pt-5 lg:pt-0">
             {tagline}
           </p>
 
