@@ -87,7 +87,7 @@ export default function NewsSection() {
                 {/* CTA Link */}
                 <div className="pt-4">
                   <Link
-                    href={item.href}
+                    href={`#`}
                     className="inline-flex items-center justify-between gap-2 text-base w-full font-bold tracking-widest text-secondary hover:text-primary transition-colors"
                   >
                     READ ARTICLE
