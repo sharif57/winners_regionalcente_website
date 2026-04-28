@@ -5,6 +5,9 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { Share2, Video, Music, Briefcase } from "lucide-react";
+import { CiFacebook, CiYoutube } from "react-icons/ci";
+import { FaLinkedin, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
     const [formData, setFormData] = useState({ name: "", email: "", note: "" });
@@ -177,14 +180,44 @@ export default function Footer() {
                             <h3 className="font-['Playfair_Display'] text-xl font-normal italic text-white">
                                 Social
                             </h3>
-                            <Image
-                                src="/image/Frame 12 (1).svg"
-                                alt="The Winners Regional Center"
-                                width={178}
-                                height={52}
-                                priority
-                                className="h-auto w-[146px] sm:w-[160px] lg:w-[178px]"
-                            />
+                            <div className="flex flex-col gap-3">
+                                <Link
+                                    href="https://www.facebook.com/profile.php?id=61582209998376"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm text-white transition-colors hover:text-[#b91d1d]"
+                                >
+                                    <CiFacebook size={24} className="transition-colors" />
+                                    Facebook
+                                </Link>
+                                <Link
+                                    href="https://www.youtube.com/@capitalfinancewinners"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm text-white transition-colors hover:text-[#b91d1d]"
+                                >
+                                    <CiYoutube size={24} className="transition-colors" />
+                                    YouTube
+                                </Link>
+                                <Link
+                                    href="https://www.tiktok.com/@winners6823"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm text-white transition-colors hover:text-[#b91d1d]"
+                                >
+                                    <FaTiktok size={24} className="transition-colors" />
+                                    TikTok
+                                </Link>
+                                <Link
+                                    href="https://www.linkedin.com/in/winners-capital-finance-a46922405"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm text-white transition-colors hover:text-[#b91d1d]"
+                                >
+                                    <FaLinkedin size={24} className="transition-colors" />
+                                    LinkedIn
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
