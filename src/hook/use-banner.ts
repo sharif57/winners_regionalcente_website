@@ -28,7 +28,7 @@ export const useBanner = (type: BannerType = "home"): BannerData => {
       },
       secondaryButton: {
         label: "EXPLORE TEXAS PROJECTS",
-        href: "/eb-5-visa/eb-5-process",
+        href: "/explore-project",
       },
       backgroundImage: "/image/background1.png",
     },

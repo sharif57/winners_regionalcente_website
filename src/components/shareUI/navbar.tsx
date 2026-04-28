@@ -134,7 +134,7 @@ export default function Navbar() {
                     })}
                 </nav>
 
-                <Link href="/dashboard" className="hidden lg:block">
+                <Link href="/request-evaluation" className="hidden lg:block">
                     <button className="h-[48px] min-w-[210px] bg-[#b91d1d] px-7 text-[15px] font-bold uppercase tracking-[0.01em] text-white transition-colors hover:bg-[#9f1717]">
                         Request Evaluation
                     </button>
@@ -220,7 +220,7 @@ export default function Navbar() {
                             );
                         })}
 
-                        <Link href="/dashboard">
+                        <Link href="/request-evaluation">
                             <button className="mt-2 h-11 w-full bg-[#b91d1d] px-4 text-[14px] font-bold uppercase tracking-[0.01em] text-white">
                                 Request Evaluation
                             </button>

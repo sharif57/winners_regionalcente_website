@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { Share2, Video, Music, Briefcase } from "lucide-react";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { FaLinkedin, FaTiktok } from "react-icons/fa";
 
