@@ -1,12 +1,34 @@
 "use client";
 
+import React from "react";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export default function ProjectDetails() {
+    const handleAgreementDownload = async () => {
+        try {
+            const agreementUrl = "http://10.10.12.111:8050/media/projects/agreements/images.jpg";
+            const response = await fetch(agreementUrl);
+
+            if (!response.ok) {
+                throw new Error("Failed to download agreement file");
+            }
+
+            const blob = await response.blob();
+            const objectUrl = window.URL.createObjectURL(blob);
+            const anchor = document.createElement("a");
+            anchor.href = objectUrl;
+            anchor.download = agreementUrl.split("/").pop() || "agreement.pdf";
+            anchor.click();
+            window.URL.revokeObjectURL(objectUrl);
+        } catch {
+            toast.error("Agreement file download failed");
+        }
+    };
+
     return (
-        <section className="bg-white  py-[32px]">
+        <section className="bg-white  py-8">
             <div className="container mx-auto px-6 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-10 items-start">
                     {/* Left Column: About Project */}
@@ -40,7 +62,7 @@ export default function ProjectDetails() {
 
                         <div className="pt-6">
                             <Button
-                                onClick={() => toast.warning("The Agreement file will be install, after doing the application backend.")}
+                                onClick={handleAgreementDownload}
                                 variant="outline"
                                 className="w-full border-[#BABABA] hover:border-[#1F1F1F] text-[#1F1F1F] px-10 py-7 text-sm font-bold uppercase tracking-widest rounded-none transition-all duration-300 group"
                             >
@@ -51,7 +73,7 @@ export default function ProjectDetails() {
                     </div>
 
                     {/* Right Column: Job Creation Progress */}
-                    <div className="lg:col-span-4 flex flex-col items-center bg-[#E8E9EC52] px-5 py-[40px] ">
+                    <div className="lg:col-span-4 flex flex-col items-center bg-[#E8E9EC52] px-5 py-10 ">
 
                         <h3 className="text-secondary text-2xl font-semibold italic mb-3 text-center">
                             Job Creation Progress

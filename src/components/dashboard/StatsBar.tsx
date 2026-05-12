@@ -1,17 +1,25 @@
 "use client";
 
+import { useGetUserDashboardQuery } from "@/redux/feature/evaluationSlice";
 
-const portfolioStats = [
-    { label: "TOTAL INVESTED", value: "$800K" },
-    { label: "ANNUAL YIELD", value: "8% ROI" },
-    { label: "ACTIVE ASSETS", value: "3 PROJECTS" },
-    { label: "ECONOMIC IMPACT", value: "1250+ JOBS" },
-];
+
+
 
 export default function StatsBar() {
+
+    const { data: dashboardData } = useGetUserDashboardQuery(undefined);
+
+    console.log(dashboardData?.data, '=============')
+    // {total_investment_amount: 0, active_projects: 0, total_projects: 0}
+    const portfolioStats = [
+        { label: "TOTAL INVESTED", value: `$${dashboardData?.data.total_investment_amount || 0}` },
+        // { label: "ANNUAL YIELD", value: "8% ROI" },
+        { label: "ACTIVE ASSETS", value: `${dashboardData?.data.active_projects || 0} PROJECTS` },
+        { label: "ECONOMIC IMPACT", value: `${dashboardData?.data.total_projects || 0}+ JOBS` },
+    ];
     return (
         <div className="mb-5 bg-white px-4 py-4 sm:mb-7 sm:px-6 sm:py-8">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-0">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 xl:gap-0">
                 {portfolioStats.map((item, index) => (
                     <div
                         key={item.label}

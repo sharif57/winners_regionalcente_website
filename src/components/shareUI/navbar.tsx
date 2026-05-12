@@ -134,11 +134,18 @@ export default function Navbar() {
                     })}
                 </nav>
 
-                <Link href="/request-evaluation" className="hidden lg:block">
-                    <button className="h-[48px] min-w-[210px] bg-[#b91d1d] px-7 text-[15px] font-bold uppercase tracking-[0.01em] text-white transition-colors hover:bg-[#9f1717]">
-                        Request Evaluation
-                    </button>
-                </Link>
+                <div className="hidden items-center gap-4 lg:flex">
+                    <Link href="/auth/login" className="hidden lg:block">
+                        <button className="h-[48px]  border border-primary px-7 text-[15px] font-bold uppercase tracking-[0.01em] text-primary transition-colors ">
+                            Log In
+                        </button>
+                    </Link>
+                    <Link href="/request-evaluation" className="hidden lg:block">
+                        <button className="h-[48px] min-w-[210px] bg-[#b91d1d] px-7 text-[15px] font-bold uppercase tracking-[0.01em] text-white transition-colors hover:bg-[#9f1717]">
+                            Request Evaluation
+                        </button>
+                    </Link>
+                </div>
 
                 <button
                     type="button"

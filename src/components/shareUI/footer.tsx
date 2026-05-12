@@ -1,47 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { clearFocus } from "@/redux/features/helper/focusSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useSendEvaluationRequestMutation } from "@/redux/feature/evaluationSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { FaLinkedin, FaTiktok } from "react-icons/fa";
+import { toast } from "sonner";
 
 export default function Footer() {
     const [formData, setFormData] = useState({ name: "", email: "", note: "" });
     const [submitted, setSubmitted] = useState(false);
 
-    const { target, requestId } = useAppSelector((state) => state.focus);
-    const dispatch = useAppDispatch();
 
     const nameInputRef = useRef<HTMLInputElement | null>(null);
 
+    const [sendEvaluationRequest, { isLoading }] = useSendEvaluationRequestMutation();
 
-    useEffect(() => {
-        if (!target) return;
-
-        const timer = window.setTimeout(() => {
-            if (target === "reachout") {
-                nameInputRef.current?.focus();
-            }
-
-            dispatch(clearFocus());
-        }, 400);
-
-        return () => window.clearTimeout(timer);
-    }, [target, requestId, dispatch]);
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
-        setSubmitted(true);
-
-        setTimeout(() => {
-            setSubmitted(false);
-            setFormData({ name: "", email: "", note: "" });
-        }, 2500);
+        try {
+            //   "email": "vt-cV37LYgJzOnX@HnI.jjo",
+            //   "full_name": "string",
+            //   "message": "string",
+            const data = {
+                full_name: formData.name,
+                email: formData.email,
+                message: formData.note,
+            }
+            const response = await sendEvaluationRequest(data).unwrap();
+            toast.success(response?.message || "Evaluation request submitted successfully!");
+        } catch (error: any) {
+            toast.error(error?.message || "Failed to submit evaluation request.");
+        }
     };
+
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -140,12 +135,12 @@ export default function Footer() {
                             {/* Submit */}
                             <button
                                 type="submit"
-                                className={`h-12 w-full text-sm font-semibold uppercase tracking-widest text-white transition-all active:scale-[0.98] ${submitted
+                                className={`h-12 w-full text-sm font-semibold uppercase tracking-widest text-white transition-all active:scale-[0.98] ${isLoading
                                     ? "bg-green-700 cursor-default"
                                     : "bg-[#b91d1d] hover:bg-[#9f1717]"
                                     }`}
                             >
-                                {submitted ? "✓ Message Sent!" : "Connect Now"}
+                                {isLoading ? "✓ Message Sent!" : "Connect Now"}
                             </button>
                         </form>
                     </div>

@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
+// use native img for preview to support blob/object URLs and external src
 import type { ChangeEvent, ComponentType } from "react";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -14,8 +15,10 @@ import {
     Shield,
     UserRound,
 } from "lucide-react";
+import { useGetSettingsQuery } from "@/redux/feature/settingSlice";
+import { useUpdateProfileMutation, useUserProfileQuery } from "@/redux/feature/userSlice";
 
-type SettingsTab = "personal" | "password" | "about" | "terms";
+type SettingsTab = "personal" | "password" | "about" | "privacy" | "terms";
 
 type PersonalInfoState = {
     name: string;
@@ -39,7 +42,8 @@ const navItems: NavItem[] = [
     { id: "personal", label: "Personal Information", icon: UserRound },
     { id: "password", label: "Change Password", icon: Lock },
     { id: "about", label: "About Us", icon: Info },
-    { id: "terms", label: "Terms & Policy", icon: Shield },
+    { id: "privacy", label: "Privacy Policy", icon: Shield },
+    { id: "terms", label: "Terms of Use", icon: Shield },
 ];
 
 const defaultPersonalInfo: PersonalInfoState = {
@@ -152,9 +156,17 @@ export default function SettingsPage() {
         newPassword: false,
         confirmPassword: false,
     });
+
+    const { data: settingsData, isLoading: settingsLoading, error: settingsError } = useGetSettingsQuery();
+
+    const { data: userProfileData } = useUserProfileQuery(undefined);
+    const [updateProfile] = useUpdateProfileMutation();
+
     const [photoPreview, setPhotoPreview] = useState("/image/men.png");
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const objectUrlRef = useRef<string | null>(null);
+    const selectedFileRef = useRef<File | null>(null);
+    const initialProfilePopulatedRef = useRef(false);
 
     useEffect(() => {
         return () => {
@@ -178,7 +190,49 @@ export default function SettingsPage() {
         const nextUrl = URL.createObjectURL(file);
         objectUrlRef.current = nextUrl;
         setPhotoPreview(nextUrl);
+        selectedFileRef.current = file;
     };
+
+    // populate personal info when user profile loads
+    useEffect(() => {
+        if (!userProfileData) return;
+
+        type UserLike = {
+            name?: string;
+            phone_number?: string;
+            phone?: string;
+            country?: string;
+            profile_image?: string | null;
+        };
+
+        const source = userProfileData as unknown as Record<string, unknown>;
+        let user: UserLike | undefined;
+
+        if (source && Object.prototype.hasOwnProperty.call(source, "data")) {
+            const d = source["data"];
+            if (d && typeof d === "object") user = d as UserLike;
+        } else if (source && typeof source === "object") {
+            user = source as UserLike;
+        }
+
+        if (!user) return;
+
+        // only populate once on initial load to avoid overwriting user edits
+        if (!initialProfilePopulatedRef.current) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setPersonalInfo((current) => ({
+                ...current,
+                name: user!.name ?? current.name,
+                phone: user!.phone_number ?? user!.phone ?? current.phone,
+                country: user!.country ?? current.country,
+            }));
+            initialProfilePopulatedRef.current = true;
+        }
+
+        if (user.profile_image) {
+            setPhotoPreview(user.profile_image as string);
+        }
+    }, [userProfileData]);
 
     const handleCancel = () => {
         if (activeTab === "personal") {
@@ -193,7 +247,24 @@ export default function SettingsPage() {
 
     const handleSave = () => {
         if (activeTab === "personal") {
-            setSavedPersonalInfo(personalInfo);
+            // send FormData with appended fields
+            const fd = new FormData();
+            fd.append("name", personalInfo.name);
+            fd.append("phone_number", personalInfo.phone || "");
+            fd.append("country", personalInfo.country || "");
+            if (selectedFileRef.current) {
+                fd.append("profile_image", selectedFileRef.current);
+            }
+
+            updateProfile(fd)
+                .unwrap()
+                .then(() => {
+                    setSavedPersonalInfo(personalInfo);
+                })
+                .catch(() => {
+                    // noop - could show toast
+                });
+
             return;
         }
 
@@ -211,13 +282,11 @@ export default function SettingsPage() {
                     </h1>
 
                     <div className="mt-8 flex flex-col items-center ">
-                        <div className="relative h-[170px] w-[170px] overflow-hidden rounded-full bg-[#ECEDEF] sm:h-[200px] sm:w-[200px]">
-                            <Image
+                        <div className="h-[170px] w-[170px] overflow-hidden rounded-full bg-[#ECEDEF] sm:h-[200px] sm:w-[200px]">
+                            <img
                                 src={photoPreview}
                                 alt="Profile photo"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 640px) 170px, 200px"
+                                className="h-full w-full object-cover"
                             />
                         </div>
 
@@ -322,6 +391,40 @@ export default function SettingsPage() {
         }
 
         if (activeTab === "about") {
+            if (settingsLoading) {
+                return (
+                    <>
+                        <h1 className="text-base leading-tight font-medium italic text-secondary sm:text-[20px]">
+                            About Us
+                        </h1>
+                        <div className="mt-8 bg-[#E8E9EC52] p-5 sm:p-6">
+                            <div className="animate-pulse space-y-4">
+                                <div className="h-4 bg-[#D8D8D8] rounded w-full" />
+                                <div className="h-4 bg-[#D8D8D8] rounded w-full" />
+                                <div className="h-4 bg-[#D8D8D8] rounded w-3/4" />
+                            </div>
+                        </div>
+                    </>
+                );
+            }
+
+            if (settingsError) {
+                return (
+                    <>
+                        <h1 className="text-base leading-tight font-medium italic text-secondary sm:text-[20px]">
+                            About Us
+                        </h1>
+                        <div className="mt-8 bg-[#E8E9EC52] p-5 sm:p-6">
+                            <p className="text-[16px] leading-[1.45] font-normal text-red-600 sm:text-[17px]">
+                                Failed to load settings
+                            </p>
+                        </div>
+                    </>
+                );
+            }
+
+            const aboutUs = settingsData?.data?.about_us || "";
+
             return (
                 <>
                     <h1 className="text-base leading-tight font-medium italic text-secondary sm:text-[20px]">
@@ -329,16 +432,46 @@ export default function SettingsPage() {
                     </h1>
 
                     <div className="mt-8 bg-[#E8E9EC52] p-5 sm:p-6">
-                        <p className="max-w-[960px] text-[16px] leading-[1.45] font-normal text-[#5E5E5E] sm:text-[17px]">
-                            At Winners Regional Center (WRC), we are committed to connecting global investors with
-                            high-quality, secure, and growth-driven investment opportunities. Our platform is designed
-                            to simplify the investment process by offering transparent project insights, seamless
-                            communication, and reliable support at every stage. With a focus on trust, innovation, and
-                            long-term value, we empower investors to make informed decisions while helping projects
-                            achieve sustainable success. Our dedicated team ensures a smooth experience through advanced
-                            technology, expert evaluation, and continuous monitoring, making WRC a trusted partner in
-                            your investment journey.
-                        </p>
+                        <div
+                            className="max-w-[960px] text-[16px] leading-[1.45] font-normal text-[#5E5E5E] sm:text-[17px] prose prose-sm max-w-none"
+                            dangerouslySetInnerHTML={{
+                                __html: aboutUs.replace(/\r\n/g, "<br />"),
+                            }}
+                        />
+                    </div>
+                </>
+            );
+        }
+
+        if (activeTab === "privacy") {
+            return (
+                <>
+                    <h1 className="text-base leading-tight font-medium italic text-secondary sm:text-[20px]">
+                        Privacy Policy
+                    </h1>
+
+                    <div className="mt-8 bg-[#E8E9EC52] p-5 sm:p-6">
+                        {settingsLoading ? (
+                            <div className="animate-pulse space-y-4">
+                                <div className="h-4 w-full rounded bg-[#D8D8D8]" />
+                                <div className="h-4 w-full rounded bg-[#D8D8D8]" />
+                                <div className="h-4 w-3/4 rounded bg-[#D8D8D8]" />
+                            </div>
+                        ) : settingsError ? (
+                            <p className="text-[16px] leading-[1.5] text-red-600 sm:text-[17px]">
+                                Failed to load settings
+                            </p>
+                        ) : (
+                            <div
+                                className="text-[16px] leading-[1.5] text-[#5E5E5E] sm:text-[17px]"
+                                dangerouslySetInnerHTML={{
+                                    __html: (settingsData?.data?.legal_privacy_policy || "").replace(
+                                        /\r\n/g,
+                                        "<br />"
+                                    ),
+                                }}
+                            />
+                        )}
                     </div>
                 </>
             );
@@ -347,26 +480,31 @@ export default function SettingsPage() {
         return (
             <>
                 <h1 className="text-base leading-tight font-medium italic text-secondary sm:text-[20px]">
-                    Terms & Policy
+                    Terms of Use
                 </h1>
 
                 <div className="mt-8 bg-[#E8E9EC52] p-5 sm:p-6">
-                    <div className="space-y-4 text-[16px] leading-[1.5] text-[#5E5E5E] sm:text-[17px]">
-                        <p>
-                            By using Winners Regional Center, you agree to provide accurate information, protect your
-                            account credentials, and use the platform only for lawful investment-related activities.
+                    {settingsLoading ? (
+                        <div className="animate-pulse space-y-4">
+                            <div className="h-4 bg-[#D8D8D8] rounded w-full" />
+                            <div className="h-4 bg-[#D8D8D8] rounded w-full" />
+                            <div className="h-4 bg-[#D8D8D8] rounded w-3/4" />
+                        </div>
+                    ) : settingsError ? (
+                        <p className="text-[16px] leading-[1.5] text-red-600 sm:text-[17px]">
+                            Failed to load settings
                         </p>
-                        <p>
-                            We collect and store personal information solely to support onboarding, identity
-                            verification, investor communication, and project administration. Your information is
-                            managed with confidentiality and operational safeguards.
-                        </p>
-                        <p>
-                            Project information, timelines, and performance targets are presented for informational
-                            purposes and may change based on regulatory, financial, or market conditions. You should
-                            review all relevant documents before making investment decisions.
-                        </p>
-                    </div>
+                    ) : (
+                        <div
+                            className="text-[16px] leading-[1.5] text-[#5E5E5E] sm:text-[17px]"
+                            dangerouslySetInnerHTML={{
+                                __html: (settingsData?.data?.legal_terms_of_use_policy || "").replace(
+                                    /\r\n/g,
+                                    "<br />"
+                                ),
+                            }}
+                        />
+                    )}
                 </div>
             </>
         );

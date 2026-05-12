@@ -1,114 +1,77 @@
-// import AboutProjectCard from "@/components/dashboard/explore-project/AboutProjectCard";
-// import DocumentsSection from "@/components/dashboard/explore-project/DocumentsSection";
-// import FundingProgressCard from "@/components/dashboard/explore-project/FundingProgressCard";
-// import JobCreationProgressCard from "@/components/dashboard/explore-project/JobCreationProgressCard";
-// import ProjectTimelineCard from "@/components/dashboard/explore-project/ProjectTimelineCard";
-// import TopStatsBar from "@/components/dashboard/explore-project/TopStatsBar";
-// import { DocumentItem, TopStat } from "@/components/dashboard/explore-project/types";
-// import ProjectHero from "@/components/visa/project/ProjectHero";
 
-// const topStats: TopStat[] = [
-//     { label: "TOTAL PROJECT VALUE", value: "$220M", sub: "" },
-//     { label: "MIN. INVESTMENT", value: "$800K", sub: "" },
-//     { label: "EXPECTED ROI", value: "5-7%", sub: "( PER ANNUAL )" },
-//     { label: "CAPITAL RAISED", value: "$140M", sub: "( 65% FUNDED )" },
-//     { label: "DURATION", value: "Jan 2026 - Dec 2028", sub: "" },
-// ];
-
-// const documents: DocumentItem[] = [
-//     { name: "Bushiness Plan", type: "PDF . 12MB" },
-//     { name: "Financial Report", type: "XLSX . 2.2MB" },
-//     { name: "Legal Documents", type: "PDF .12MB" },
-//     { name: "Agreement", type: "PDF .12MB" },
-// ];
-
-// export default function ExploreProject() {
-//     return (
-//         <div>
-//             <ProjectHero />
-//             <section className="w-full bg-white p-3 sm:p-4">
-//                 <TopStatsBar stats={topStats} />
-
-//                 <div className="mb-3 grid grid-cols-1 gap-3 xl:grid-cols-10 sm:mb-4 sm:gap-4">
-//                     <AboutProjectCard />
-//                     <JobCreationProgressCard />
-//                 </div>
-
-//                 <div className="mb-3 grid grid-cols-1 gap-3 lg:grid-cols-2 sm:mb-4 sm:gap-4">
-//                     <FundingProgressCard />
-//                     <ProjectTimelineCard />
-//                 </div>
-
-//                 <DocumentsSection documents={documents} />
-//             </section>
-//         </div>
-//     );
-// }
 "use client";
 
+import { useState } from "react";
+import StatsBar from "@/components/dashboard/StatsBar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useProjectListQuery } from "@/redux/feature/projectSlice";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-type ProjectStatus = "Active" | "Pending" | "Completed";
+const DEFAULT_PROJECT_IMAGE = "/image/project-1.png";
 
-
-
-const portfolioStats = [
-    { label: "TOTAL INVESTED", value: "$800K" },
-    { label: "ANNUAL YIELD", value: "8% ROI" },
-    { label: "ACTIVE ASSETS", value: "3 PROJECTS" },
-    { label: "ECONOMIC IMPACT", value: "1250+ JOBS" },
-];
-
-
-
-const projects = [
-    {
-        id: 1,
-        image: "/image/project-1.png",
-        status: "Active",
-        statusColor: "bg-[#1E293B]",
-        title: "WINNERS TOWER AT MILK-DALLAS, TEXAS",
-        investment: "$800k",
-        roi: "5.5%",
-        description: "Premium residential complex in the heart of Austin teach corridor.",
-        buttonLabel: "VIEW DETAILS",
-        buttonVariant: "outline",
-    },
-    {
-        id: 2,
-        image: "/image/project-2.png",
-        status: "Limited",
-        statusColor: "bg-[#C51D1D]",
-        title: "Houston Commercial Tower Project",
-        investment: "$800k",
-        roi: "5.5%",
-        description: "Iconic business center targeting professionals service in Houston.",
-        buttonLabel: "VIEW DETAILS",
-        buttonVariant: "outline",
-    },
-    {
-        id: 3,
-        image: "/image/project-3.png",
-        status: "Fully Funded",
-        statusColor: "bg-[#94A3B8]",
-        title: "Dallas Mixed-Use Development",
-        investment: "$800k",
-        roi: "5.5%",
-        description: "Urban lifestyle development successfully funded by global investor.",
-        buttonLabel: "CLOSED",
-        buttonVariant: "ghost",
-    },
-];
 export default function ExploreProjectPage() {
     const router = useRouter();
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const { data, isLoading, isFetching, isError } = useProjectListQuery({
+        page: currentPage,
+    });
+
+    const projects = data?.data ?? [];
+    const totalPages = data?.meta?.total_pages ?? 1;
+
+    const goToPage = (page: number) => {
+        if (page < 1 || page > totalPages || page === currentPage) {
+            return;
+        }
+
+        setCurrentPage(page);
+    };
+
+    const getStatusColor = (status: string) => {
+        switch (status?.toLowerCase()) {
+            case "active":
+                return "bg-[#1E293B]";
+            case "completed":
+                return "bg-[#94A3B8]";
+            default:
+                return "bg-[#C51D1D]";
+        }
+    };
+
+    const formatCurrency = (value: string) => {
+        const amount = Number(value);
+
+        if (Number.isNaN(amount)) {
+            return value;
+        }
+
+        return `$${amount.toLocaleString("en-US", {
+            maximumFractionDigits: 0,
+        })}`;
+    };
+
+    const getButtonLabel = (status: string) => {
+        return status?.toLowerCase() === "completed" ? "CLOSED" : "VIEW DETAILS";
+    };
+
+    const getButtonVariant = (status: string) => {
+        return status?.toLowerCase() === "completed" ? "secondary" : "outline";
+    };
+
+    const getButtonClassName = (status: string) => {
+        return status?.toLowerCase() === "completed"
+            ? "bg-[#94A3B8]/20 text-[#64748B] hover:bg-[#94A3B8]/30 cursor-not-allowed"
+            : "border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white";
+    };
 
     return (
         <section>
-            <div className="mb-5 bg-white px-4 py-4 sm:mb-7 sm:px-6 sm:py-8">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-0">
+            <div className="mb-5 ">
+                {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-0">
                     {portfolioStats.map((item, index) => (
                         <div
                             key={item.label}
@@ -125,7 +88,8 @@ export default function ExploreProjectPage() {
                             </p>
                         </div>
                     ))}
-                </div>
+                </div> */}
+                <StatsBar />
             </div>
 
             <section className="w-full bg-white p-4 ">
@@ -139,42 +103,66 @@ export default function ExploreProjectPage() {
                     </button>
                 </div>
 
+                {isLoading && (
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        {Array.from({ length: 6 }).map((_, index) => (
+                            <div
+                                key={`project-skeleton-${index}`}
+                                className="bg-[#E8E9EC52] overflow-hidden flex flex-col"
+                            >
+                                <div className="h-64 bg-[#E2E8F0] animate-pulse" />
+                                <div className="p-8 space-y-4">
+                                    <div className="h-6 bg-[#E2E8F0] animate-pulse" />
+                                    <div className="h-16 bg-[#E2E8F0] animate-pulse" />
+                                    <div className="h-10 bg-[#E2E8F0] animate-pulse" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {!isLoading && isError && (
+                    <p className="text-[#C51D1D] text-base">Failed to load projects. Please try again.</p>
+                )}
+
+                {!isLoading && !isError && projects.length === 0 && (
+                    <p className="text-[#696969] text-base">No projects found.</p>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project) => (
                         <div
                             key={project.id}
                             className="bg-[#E8E9EC52] group transition-all duration-300 hover:shadow-2xl overflow-hidden flex flex-col"
                         >
-                            {/* Image with Badge */}
                             <div className="relative h-64 overflow-hidden">
                                 <Image
-                                    src={project.image}
-                                    alt={project.title}
+                                    src={project.banner || DEFAULT_PROJECT_IMAGE}
+                                    alt={project.name}
                                     fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                                 <div className={cn(
                                     "absolute top-4 right-0 px-4 py-1.5 text-xs font-bold text-white tracking-wider",
-                                    project.statusColor
+                                    getStatusColor(project.status)
                                 )}>
-                                    {project.status}
+                                    {project.status?.toLowerCase() === "completed" ? "Fully Funded" : project.status}
                                 </div>
                             </div>
 
-                            {/* Content */}
-                            <div className="p-8 flex flex-col flex-grow space-y-2">
+                            <div className="p-8 flex flex-col grow space-y-2">
                                 <h3 className="text-xl font-bold italic uppercase text-secondary max-w-xs leading-snug">
-                                    {project.title}
+                                    {project.name}
                                 </h3>
 
                                 <div className="flex items-center gap-6 py-4">
                                     <div className="space-y-1">
                                         <p className="text-base font-normal uppercase tracking-widest text-[#696969]">INVESTMENT</p>
-                                        <p className="text-xl font-bold text-secondary">{project.investment}</p>
+                                        <p className="text-xl font-bold text-secondary">{formatCurrency(project.minimum_investment)}</p>
                                     </div>
                                     {project.roi && (
                                         <>
-                                            <div className="w-[2px] h-10 bg-[#000000]" />
+                                            <div className="w-0.5 h-10 bg-[#000000]" />
                                             <div className="space-y-1">
                                                 <p className="text-base font-normal uppercase tracking-widest text-[#696969]">EST.ROI</p>
                                                 <p className="text-lg font-bold text-[#EA4335]">{project.roi}</p>
@@ -183,28 +171,84 @@ export default function ExploreProjectPage() {
                                     )}
                                 </div>
 
-                                <p className="text-[#696969] text-base font-normal leading-relaxed flex-grow">
-                                    {project.description}
+                                <p className="text-[#696969] text-base font-normal leading-relaxed grow">
+                                    {project.short_description}
                                 </p>
 
                                 <div className="pt-4">
                                     <Button
-                                        onClick={() => router.push('/dashboard/explore-project/1')}
-                                        variant={project.buttonVariant === "ghost" ? "secondary" : "outline"}
+                                        onClick={() => {
+                                            if (project.status?.toLowerCase() === "completed") {
+                                                return;
+                                            }
+
+                                            router.push(`/dashboard/explore-project/${project.id}`);
+                                        }}
+                                        variant={getButtonVariant(project.status)}
+                                        disabled={project.status?.toLowerCase() === "completed"}
                                         className={cn(
                                             "w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300",
-                                            project.buttonVariant === "ghost"
-                                                ? "bg-[#94A3B8]/20 text-[#64748B] hover:bg-[#94A3B8]/30 cursor-not-allowed"
-                                                : "border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white"
+                                            getButtonClassName(project.status)
                                         )}
                                     >
-                                        {project.buttonLabel}
+                                        {getButtonLabel(project.status)}
                                     </Button>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
+
+                {!isLoading && !isError && projects.length > 0 && totalPages > 1 && (
+                    <div className="flex items-center justify-center gap-6 mt-16 text-[#1A1A1A]">
+                        <button
+                            type="button"
+                            className={cn(
+                                "p-2 hover:text-primary transition-colors",
+                                (currentPage === 1 || isFetching) && "opacity-50 cursor-not-allowed hover:text-[#1A1A1A]"
+                            )}
+                            onClick={() => goToPage(currentPage - 1)}
+                            disabled={currentPage === 1 || isFetching}
+                            aria-label="Previous page"
+                        >
+                            <ChevronLeft className="w-6 h-6" />
+                        </button>
+
+                        <div className="flex gap-3">
+                            {Array.from({ length: totalPages }).map((_, index) => {
+                                const pageNumber = index + 1;
+
+                                return (
+                                    <button
+                                        key={pageNumber}
+                                        type="button"
+                                        onClick={() => goToPage(pageNumber)}
+                                        disabled={isFetching}
+                                        aria-label={`Page ${pageNumber}`}
+                                        className={cn(
+                                            "rounded-full transition-all duration-300",
+                                            pageNumber === currentPage ? "bg-primary w-6 h-2.5" : "bg-[#D1D1D1] w-2.5 h-2.5",
+                                            isFetching && "cursor-not-allowed"
+                                        )}
+                                    />
+                                );
+                            })}
+                        </div>
+
+                        <button
+                            type="button"
+                            className={cn(
+                                "p-2 hover:text-primary transition-colors",
+                                (currentPage === totalPages || isFetching) && "opacity-50 cursor-not-allowed hover:text-[#1A1A1A]"
+                            )}
+                            onClick={() => goToPage(currentPage + 1)}
+                            disabled={currentPage === totalPages || isFetching}
+                            aria-label="Next page"
+                        >
+                            <ChevronRight className="w-6 h-6" />
+                        </button>
+                    </div>
+                )}
             </section>
         </section>
     );

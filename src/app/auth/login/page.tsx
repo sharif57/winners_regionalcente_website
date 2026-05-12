@@ -1,13 +1,62 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { useLoginMutation } from "@/redux/feature/authSlice";
 
 export default function LoginPage() {
+
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [login, { isLoading }] = useLoginMutation();
+
+    const getErrorMessage = (error: unknown) => {
+        if (typeof error === "object" && error !== null && "data" in error) {
+            const data = (error as { data?: { message?: string; detail?: string } }).data;
+            return data?.message || data?.detail;
+        }
+
+        if (error instanceof Error) {
+            return error.message;
+        }
+
+        return undefined;
+    };
+
+    const handleLogin = async () => {
+        const trimmedEmail = email.trim();
+
+        if (!trimmedEmail || !password) {
+            toast.error("Please enter your email and password.");
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+
+        try {
+            const res = await login({ email: trimmedEmail, password }).unwrap();
+            const token = res?.data?.access;
+
+
+            if (token) {
+                localStorage.setItem("accessToken", token);
+            }
+            toast.success(res?.message || "Login successful!");
+
+            router.push("/dashboard");
+        } catch (error) {
+            toast.error(getErrorMessage(error) || "Login failed. Please check your credentials.");
+        }
+    }
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-right-10 duration-700">
@@ -49,6 +98,8 @@ export default function LoginPage() {
                         </label>
                         <input
                             type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder="Email address"
                             className="w-full bg-white border-none px-6 py-4 text-sm focus:ring-1 focus:ring-[#F65353] transition-all outline-none"
                         />
@@ -62,6 +113,8 @@ export default function LoginPage() {
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Your password"
                                 className="w-full bg-white border-none px-6 py-4 text-sm focus:ring-1 focus:ring-[#F65353] transition-all outline-none pr-12"
                             />
@@ -94,9 +147,11 @@ export default function LoginPage() {
             {/* Primary Action */}
             <div className="space-y-6">
                 <Button
+                    onClick={handleLogin}
+                    disabled={isLoading}
                     className="w-full bg-[#C51D1D] hover:bg-[#A31818] text-white py-8 text-base font-bold uppercase tracking-widest rounded-none shadow-xl transform transition-all hover:scale-[1.02]"
                 >
-                    <Link href="/auth/verify-email">Sign In</Link>
+                    {isLoading ? "Signing In..." : "Sign In"}
                 </Button>
 
                 <p className="text-center text-[#696969] text-sm font-medium">

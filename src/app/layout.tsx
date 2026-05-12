@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Lato } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
-import Providers from "@/redux/features/Providers";
+import Providers from "@/Provider/Providers";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -33,7 +32,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Providers>
-          <Toaster position="top-right" />
           {children}
         </Providers>
       </body>

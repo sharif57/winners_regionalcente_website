@@ -2,11 +2,8 @@
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { requestFocus } from "@/redux/features/helper/focusSlice";
-import { useAppDispatch } from "@/redux/hooks";
 
 export default function ProjectCTA() {
-    const dispatch = useAppDispatch();
 
     return (
         <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-[#0A1224]">
@@ -47,7 +44,6 @@ export default function ProjectCTA() {
 
                     <Button
                         onClick={() => {
-                            dispatch(requestFocus("reachout"));
                             window.scrollBy({
                                 top: 260,
                                 behavior: "smooth",

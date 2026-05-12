@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useSendEvaluationRequestMutation } from "@/redux/feature/evaluationSlice";
+import {  useState } from "react";
+import { toast } from "sonner";
 
 const initialTemplate = `
 Hi [First Name]
@@ -33,21 +36,26 @@ export default function Page() {
     const [email, setEmail] = useState("");
     const [question, setQuestion] = useState("");
     const message = initialTemplate;
-    const [submitting, setSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const [sendEvaluationRequest, { isLoading }] = useSendEvaluationRequestMutation();
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSubmitting(true);
-        // Simulate request - replace with real API integration
-        await new Promise((r) => setTimeout(r, 900));
-        console.log({ fullName, phone, email, question });
-        setSubmitting(false);
-        setSubmitted(true);
-        setFullName("");
-        setPhone("");
-        setEmail("");
-        setQuestion("");
+        try {
+            //   "email": "vt-cV37LYgJzOnX@HnI.jjo",
+            //   "full_name": "string",
+            //   "message": "string",
+            const data = {
+                full_name: fullName,
+                phone,
+                email,
+                message,
+            }
+            const response = await sendEvaluationRequest(data).unwrap();
+            toast.success(response?.message || "Evaluation request submitted successfully!");
+        } catch (error: any) {
+            toast.error(error?.message || "Failed to submit evaluation request.");
+        }
     };
 
     return (
@@ -118,15 +126,12 @@ export default function Page() {
 
                                     <button
                                         type="submit"
-                                        disabled={submitting}
+                                        disabled={isLoading}
                                         className="mt-3 w-full  bg-[#b91d1d] px-4 py-3 text-sm font-semibold text-white hover:bg-[#9f1717] disabled:opacity-60"
                                     >
-                                        {submitting ? "Submitting..." : "SUBMIT YOUR EVALUATION REQUEST"}
+                                        {isLoading ? "Submitting..." : "SUBMIT YOUR EVALUATION REQUEST"}
                                     </button>
 
-                                    {submitted && (
-                                        <p className="mt-2 text-sm text-green-700">Thank you — your request has been submitted.</p>
-                                    )}
                                 </form>
                             </div>
                         </aside>
@@ -134,7 +139,7 @@ export default function Page() {
                 </div>
 
                 {/* Full-width submit bar below content */}
-                <div className="mt-6">
+                {/* <div className="mt-6">
                     <button
                         type="button"
                         onClick={() => document.querySelector('form')?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
@@ -142,7 +147,7 @@ export default function Page() {
                     >
                         SUBMIT
                     </button>
-                </div>
+                </div> */}
             </section>
         </main>
     );

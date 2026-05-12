@@ -3,15 +3,27 @@
 import React from "react";
 import { MapPin } from "lucide-react";
 
-export default function ProjectHero() {
+type ProjectHeroProps = {
+    title?: string;
+    location?: string;
+    status?: string;
+    eb5Enabled?: boolean;
+};
+
+export default function ProjectHero({
+    title = "Winners Tower at Milk - Dallas, Texas",
+    location = "301 Congress Ave, Austin, TX",
+    status = "Active",
+    eb5Enabled = true,
+}: ProjectHeroProps) {
     return (
-        <section className="relative w-full min-h-[500px] lg:min-h-[700px] flex items-end overflow-hidden">
+        <section className="relative w-full min-h-125 lg:min-h-175 flex items-end overflow-hidden">
             {/* Background Image with Dark Overlay */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 hover:scale-105"
                 style={{ backgroundImage: `url('/image/background6.png')` }}
             >
-                <div className="absolute inset-0 bg-black/50 lg:bg-gradient-to-t lg:from-black/80 lg:to-black/20" />
+                <div className="absolute inset-0 bg-black/50 lg:bg-linear-to-t lg:from-black/80 lg:to-black/20" />
             </div>
 
             {/* Content Container */}
@@ -21,10 +33,10 @@ export default function ProjectHero() {
                         {/* Badges */}
                         <div className="flex flex-wrap gap-4">
                             <span className="bg-[#F65353] text-white text-xs font-bold px-5 py-2 uppercase tracking-widest shadow-lg">
-                                TEA Qualified
+                                {status}
                             </span>
                             <span className="border border-white/40 text-white text-xs font-bold px-5 py-2 uppercase tracking-widest backdrop-blur-sm">
-                                EB-5 Eligible
+                                {eb5Enabled ? "EB-5 Eligible" : "EB-5 Not Enabled"}
                             </span>
                             <span className="border border-white/40 text-white text-xs font-bold px-5 py-2 uppercase tracking-widest backdrop-blur-sm">
                                 USCIS Compliant
@@ -33,8 +45,8 @@ export default function ProjectHero() {
 
                         {/* Title */}
                         <h1 className="text-white text-3xl md:text-5xl lg:text-[56px] font-bold italic uppercase leading-none transform transition-all duration-500 hover:translate-x-2">
-                            Winners Tower at Milk - <br />
-                            <span className="text-white/90">Dallas, Texas</span>
+                            {title.split(" - ")[0] ?? title} - <br />
+                            <span className="text-white/90">{title.split(" - ")[1] ?? ""}</span>
                         </h1>
                     </div>
 
@@ -45,7 +57,7 @@ export default function ProjectHero() {
                                 Strategic Location
                             </p>
                             <h3 className="text-[#1F1F1F] text-lg lg:text-xl font-bold italic">
-                                301 Congress Ave, Austin, TX
+                                {location}
                             </h3>
                         </div>
                         <div className="w-12 h-12 bg-[#F65353]/10 flex items-center justify-center rounded-full">
