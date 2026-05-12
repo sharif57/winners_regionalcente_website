@@ -1,5 +1,6 @@
 "use client";
 
+import { useAllSupportMessagesQuery, useSubmitSupportMessageMutation } from "@/redux/feature/supportSlice";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -7,18 +8,26 @@ export default function SupportPage() {
     const [message, setMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const { data: supportMessagesData } = useAllSupportMessagesQuery(undefined);
+    const [submitSupportMessage] = useSubmitSupportMessageMutation();
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!message.trim()) return;
 
         setIsSubmitting(true);
 
-        setTimeout(() => {
+        try {
+            await submitSupportMessage({ subject: "Support Message", message }).unwrap();
             setMessage("");
-            setIsSubmitting(false);
             toast.success("Support message sent successfully!");
-        }, 1000);
+        } catch (err) {
+            console.error("Support submit error:", err);
+            toast.error("Failed to send support message. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -62,6 +71,20 @@ export default function SupportPage() {
                     </button>
                 </div>
             </form>
+
+            {/* Previous support messages */}
+            <div className="mt-8">
+                <h4 className="mb-4 text-lg font-semibold text-[#1F1F1F]">Previous Messages</h4>
+                <div className="space-y-4">
+                    {((supportMessagesData?.data?.results ?? supportMessagesData?.data) || []).map((m: { id: number; subject?: string; message?: string; created_at?: string }) => (
+                        <div key={m.id} className="bg-[#F9FAFB] p-4 rounded-sm">
+                            <p className="text-sm font-medium text-[#1F1F1F]">{m.subject ?? 'Support'}</p>
+                            <p className="text-sm text-[#696969]">{m.message}</p>
+                            <p className="text-xs text-[#9A9A9A] mt-2">{m.created_at ? new Date(m.created_at).toLocaleString() : ''}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </section>
     );
 }

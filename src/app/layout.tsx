@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wimers Design System",
-  description: "Brand-first design system with Lato typography",
+  title: "Wimers Region Center",
+  description: "A platform connecting investors with promising startups in the MENA region, fostering growth and innovation.",
 };
 
 export default function RootLayout({
