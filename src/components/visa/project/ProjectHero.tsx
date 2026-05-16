@@ -8,6 +8,7 @@ type ProjectHeroProps = {
     location?: string;
     status?: string;
     eb5Enabled?: boolean;
+    banner?: string;
 };
 
 export default function ProjectHero({
@@ -15,13 +16,14 @@ export default function ProjectHero({
     location = "301 Congress Ave, Austin, TX",
     status = "Active",
     eb5Enabled = true,
+    banner
 }: ProjectHeroProps) {
     return (
         <section className="relative w-full min-h-125 lg:min-h-175 flex items-end overflow-hidden">
             {/* Background Image with Dark Overlay */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 hover:scale-105"
-                style={{ backgroundImage: `url('/image/background6.png')` }}
+                style={{ backgroundImage: `url('${banner || "/image/background6.png"}')` }}
             >
                 <div className="absolute inset-0 bg-black/50 lg:bg-linear-to-t lg:from-black/80 lg:to-black/20" />
             </div>

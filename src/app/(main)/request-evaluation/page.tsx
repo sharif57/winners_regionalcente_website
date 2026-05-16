@@ -2,7 +2,7 @@
 "use client";
 
 import { useSendEvaluationRequestMutation } from "@/redux/feature/evaluationSlice";
-import {  useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 const initialTemplate = `
@@ -54,7 +54,7 @@ export default function Page() {
             const response = await sendEvaluationRequest(data).unwrap();
             toast.success(response?.message || "Evaluation request submitted successfully!");
         } catch (error: any) {
-            toast.error(error?.message || "Failed to submit evaluation request.");
+            toast.error(error?.data?.message || "Failed to submit evaluation request.");
         }
     };
 

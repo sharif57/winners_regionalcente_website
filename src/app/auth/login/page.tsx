@@ -7,6 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/redux/feature/authSlice";
+import { useLazyUserProfileQuery } from "@/redux/feature/userSlice";
 
 export default function LoginPage() {
 
@@ -15,6 +16,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [login, { isLoading }] = useLoginMutation();
+    const [loadUserProfile] = useLazyUserProfileQuery();
 
     const getErrorMessage = (error: unknown) => {
         if (typeof error === "object" && error !== null && "data" in error) {
@@ -52,7 +54,20 @@ export default function LoginPage() {
             }
             toast.success(res?.message || "Login successful!");
 
-            router.push("/dashboard");
+            try {
+                const profileResponse = await loadUserProfile(undefined).unwrap();
+                const isProfileComplete = Boolean(
+                    profileResponse &&
+                    typeof profileResponse === "object" &&
+                    "data" in profileResponse &&
+                    (profileResponse as { data?: { complete_profile?: boolean } }).data?.complete_profile
+                );
+
+                router.push(isProfileComplete ? "/dashboard" : "/arrangement");
+            } catch {
+                // Fallback route; global route guard will enforce the final destination.
+                router.push("/arrangement");
+            }
         } catch (error) {
             toast.error(getErrorMessage(error) || "Login failed. Please check your credentials.");
         }
@@ -80,12 +95,12 @@ export default function LoginPage() {
                 >
                     Sign In
                 </Button>
-                <Button
+                {/* <Button
                     variant="outline"
                     className="bg-transparent border-[#E5E7EB] hover:bg-gray-50 text-[#1F1F1F] px-10 py-6 text-sm font-bold uppercase tracking-widest rounded-none transform transition-all"
                 >
                     <Link href="/auth/register">Sign Up</Link>
-                </Button>
+                </Button> */}
             </div>
 
             {/* Form Box Section */}
@@ -154,7 +169,7 @@ export default function LoginPage() {
                     {isLoading ? "Signing In..." : "Sign In"}
                 </Button>
 
-                <p className="text-center text-[#696969] text-sm font-medium">
+                {/* <p className="text-center text-[#696969] text-sm font-medium">
                     Don&lsquo;t have an account?{" "}
                     <Link
                         href="/auth/register"
@@ -162,7 +177,7 @@ export default function LoginPage() {
                     >
                         Sign Up
                     </Link>
-                </p>
+                </p> */}
             </div>
         </div>
     );

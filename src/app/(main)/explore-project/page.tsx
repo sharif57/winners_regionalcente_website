@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useProjectListQuery } from "@/redux/feature/projectSlice";
+import Link from "next/link";
 
 const DEFAULT_PROJECT_IMAGE = "/image/project-1.png";
 
@@ -129,12 +130,14 @@ export default function ProjectsSection() {
                       CLOSED
                     </Button>
                   ) : (
-                    <Button
-                      variant="outline"
-                      className="w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300 border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white"
-                    >
-                      VIEW DETAILS
-                    </Button>
+                    <Link href={`/explore-project/${project.id}`}>
+                      <Button
+                        variant="outline"
+                        className="w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300 border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white"
+                      >
+                        VIEW DETAILS
+                      </Button>
+                    </Link>
                   )}
                 </div>
               </div>

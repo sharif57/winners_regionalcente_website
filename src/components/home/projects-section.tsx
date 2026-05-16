@@ -6,6 +6,7 @@ import { useMemo, useRef, useState } from "react";
 import ReusableHeader from "@/hook/resuable-header";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { useProjectListQuery } from "@/redux/feature/projectSlice";
 
 type ApiProject = {
@@ -160,21 +161,33 @@ export default function ProjectsSection() {
                   </div>
 
                   <p className="text-[#696969] text-base font-normal leading-relaxed flex-grow">
-                    {project.short_description}
+                    {project.short_description?.slice(0, 100) || "No description available."}
                   </p>
 
                   <div className="pt-4">
-                    <Button
-                      variant={isCompleted ? "secondary" : "outline"}
-                      className={cn(
-                        "w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300",
-                        isCompleted
-                          ? "bg-[#94A3B8]/20 text-[#64748B] hover:bg-[#94A3B8]/30 cursor-not-allowed"
-                          : "border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white"
-                      )}
-                    >
-                      {isCompleted ? "CLOSED" : "VIEW DETAILS"}
-                    </Button>
+                    {isCompleted ? (
+                      <Button
+                        variant="secondary"
+                        className={cn(
+                          "w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300",
+                          "bg-[#94A3B8]/20 text-[#64748B] hover:bg-[#94A3B8]/30 cursor-not-allowed"
+                        )}
+                      >
+                        CLOSED
+                      </Button>
+                    ) : (
+                      <Link href={`/explore-project/${project.id}`}>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full rounded-none py-6 font-bold tracking-widest text-base transition-all duration-300",
+                            "border-[#9399A6] text-[#121E38] hover:bg-[#121E38] hover:text-white"
+                          )}
+                        >
+                          VIEW DETAILS
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

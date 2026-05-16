@@ -38,7 +38,7 @@ const baseQueryWithAutoLogout: BaseQueryFn<
     const isOnAuthRoute = window.location.pathname.startsWith("/auth");
 
     if (!isOnAuthRoute) {
-      window.location.href = "/auth";
+      window.location.href = "/auth/login";
     }
   }
 
@@ -55,6 +55,7 @@ export const baseApi = createApi({
     'Setting',
     'Notification',
     'Support',
+    'ArrangementProgress'
 
   ],
   endpoints: () => ({}),

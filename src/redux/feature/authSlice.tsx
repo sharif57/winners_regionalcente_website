@@ -48,6 +48,8 @@ export const authSlice = createSlice({
       localStorage.removeItem("accessToken");
       localStorage.removeItem("rememberMe");
       localStorage.removeItem("savedEmail");
+      document.cookie =
+        "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=lax";
     },
     clearError: (state) => {
       state.error = null;

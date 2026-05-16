@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useSendEvaluationRequestMutation } from "@/redux/feature/evaluationSlice";
 
 export default function ContactSection() {
   const [name, setName] = React.useState("");
@@ -11,20 +13,29 @@ export default function ContactSection() {
   const [phone, setPhone] = React.useState("");
   const [message, setMessage] = React.useState("");
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [sendEvaluationRequest, { isLoading }] = useSendEvaluationRequestMutation();
 
-    setTimeout(() => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const data = {
+        full_name: name,
+        phone,
+        email,
+        message,
+      }
+      const response = await sendEvaluationRequest(data).unwrap();
+
       setName("");
       setEmail("");
       setPhone("");
       setMessage("");
 
-      toast.success("Your evaluation request has been submitted successfully! Our team will contact you soon.")
-    }, 1500);
-
+      toast.success(response?.message || "Evaluation request submitted successfully!");
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to submit evaluation request.");
+    }
   };
-
   return (
     <section className="py-8 bg-white overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12">
@@ -97,10 +108,10 @@ export default function ContactSection() {
               <div className="pt-4">
                 <Button
                   type="submit"
-
+                  disabled={isLoading}
                   className="w-full bg-[#C51D1D] hover:bg-[#A31818] text-white py-8 text-xs md:text-base font-bold tracking-widest uppercase rounded-none transition-all duration-300 transform"
                 >
-                  SUBMIT YOUR EVALUATION REQUEST
+                  {isLoading ? "Submitting..." : "Submit Evaluation Request"}
                 </Button>
               </div>
             </form>

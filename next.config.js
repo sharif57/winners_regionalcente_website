@@ -13,6 +13,12 @@ const nextConfig = {
         port: "8050",
         pathname: "/media/projects/**",
       },
+      {
+        protocol: "http",
+        hostname: "10.10.12.111",
+        port: "8050",
+        pathname: "/media/profile_images/**",
+      },
     ],
   },
 };

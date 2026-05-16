@@ -8,7 +8,6 @@ import TopStatsBar from "@/components/dashboard/explore-project/TopStatsBar";
 import { DocumentItem, TopStat } from "@/components/dashboard/explore-project/types";
 import ProjectHero from "@/components/visa/project/ProjectHero";
 import { useProjectDetailsQuery } from "@/redux/feature/projectSlice";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 
 const formatCurrency = (value?: string) => {
@@ -52,24 +51,24 @@ const formatStatus = (value?: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
-export default function ExploreProject() {
+export default function ExploreProjectDetails() {
+    // http://localhost:3000/explore-project/6
     const params = useParams();
     const id = Array.isArray(params.id) ? params.id[0] : params.id;
     const projectId = Number(id);
+    console.log(projectId, '------------------')
 
     const { data } = useProjectDetailsQuery(projectId, {
         skip: Number.isNaN(projectId),
     });
 
     const project = data?.data;
-    console.log(project, '=========')
-
 
     const topStats: TopStat[] = [
         { label: "TOTAL PROJECT VALUE", value: formatCurrency(project?.total_project_value) },
         { label: "MIN. INVESTMENT", value: formatCurrency(project?.minimum_investment) },
         { label: "EXPECTED ROI", value: project?.roi ?? "TBD", sub: "( PER ANNUAL )" },
-        { label: "JOB IMPACT", value: project?.job_impact ?? "TBD", sub: project?.is_eb_5_enabled ? "( EB-5 ENABLED )" : "" },
+        { label: "CAPITAL RAISED", value: formatCurrency(project?.minimum_investment), sub: "( 65% FUNDED )" },
         { label: "DURATION", value: `${formatDate(project?.project_start_date)} - ${formatDate(project?.project_end_date)}`, sub: "" },
     ];
 
@@ -92,8 +91,8 @@ export default function ExploreProject() {
         <div>
             <ProjectHero
                 title={heroTitle}
-                location={heroLocation}
                 banner={project?.banner}
+                location={heroLocation}
                 status={formatStatus(project?.status)}
                 eb5Enabled={Boolean(project?.is_eb_5_enabled)}
             />
@@ -129,20 +128,7 @@ export default function ExploreProject() {
                     />
                 </div>
 
-                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 sm:gap-4 italic items-center">
-                    <div>
-                        <DocumentsSection documents={documents} />
-                    </div>
-                    <div className="space-y-6">
-                        <h1 className="text-2xl font-semibold text-secondary sm:text-4xl text-center">Ready to take next step?</h1>
-                        <div className="flex items-center justify-center gap-4">
-                            <Link href={`/dashboard/explore-project/investment?id=${projectId}`}>
-                                <button className=" inline-flex items-center justify-center bg-[#C91E1E] px-6 py-3 text-base font-bold text-white transition-colors hover:bg-[#AD1717] sm:text-base">START INVESTMENT</button>
-                            </Link>
-                            <button className=" inline-flex items-center justify-center text-secondary border px-6 py-3 text-base font-bold  transition-colors  sm:text-base">REQUEST EVALUATION</button>
-                        </div>
-                    </div>
-                </div>
+                <DocumentsSection documents={documents} />
             </section>
         </div>
     );

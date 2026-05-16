@@ -33,6 +33,8 @@ const settingSlice = baseApi.injectEndpoints({
       invalidatesTags: ["Evaluation"],
   }),
 
+  
+
   }),
 });
 

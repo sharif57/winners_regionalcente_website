@@ -5,6 +5,7 @@ import Image from "next/image";
 import { TrendingUp, Wallet, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const features = [
   {
@@ -96,12 +97,13 @@ export default function WealthManagement() {
 
             {/* CTA Button */}
             <div className="pt-4">
-              <Button
-                onClick={() => toast.warning("Feature coming soon!")}
-                className="w-full  bg-[#C51D1D] hover:bg-[#A31818] text-white px-12 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105"
-              >
-                REQUEST EVALUATION
-              </Button>
+              <Link href="/request-evaluation" className="block">
+                <Button
+                  className="w-full  bg-[#C51D1D] hover:bg-[#A31818] text-white px-12 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105"
+                >
+                  REQUEST EVALUATION
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
