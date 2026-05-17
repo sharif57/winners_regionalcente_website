@@ -17,7 +17,7 @@ const settingSlice = baseApi.injectEndpoints({
     // /user-dashboard/
     getUserDashboard: builder.query({
       query: () => ({
-        url: `/user-dashboard/`,
+        url: `/user/dashboard/`,
         method: "GET",
       }),
       providesTags: ["Evaluation"],

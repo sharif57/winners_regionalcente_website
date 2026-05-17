@@ -90,6 +90,7 @@ export default function ExploreProjectDetails() {
         <div>
             <ProjectHero
                 title={heroTitle}
+                banner={project?.banner}
                 location={heroLocation}
                 status={formatStatus(project?.status)}
                 eb5Enabled={Boolean(project?.is_eb_5_enabled)}

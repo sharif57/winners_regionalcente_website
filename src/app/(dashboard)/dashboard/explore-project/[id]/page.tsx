@@ -139,7 +139,7 @@ export default function ExploreProject() {
                             <Link href={`/dashboard/explore-project/investment?id=${projectId}`}>
                                 <button className=" inline-flex items-center justify-center bg-[#C91E1E] px-6 py-3 text-base font-bold text-white transition-colors hover:bg-[#AD1717] sm:text-base">START INVESTMENT</button>
                             </Link>
-                            <button className=" inline-flex items-center justify-center text-secondary border px-6 py-3 text-base font-bold  transition-colors  sm:text-base">REQUEST EVALUATION</button>
+                            <Link href={'/request-evaluation'} className=" inline-flex items-center justify-center text-secondary border px-6 py-3 text-base font-bold  transition-colors  sm:text-base">REQUEST EVALUATION</Link>
                         </div>
                     </div>
                 </div>

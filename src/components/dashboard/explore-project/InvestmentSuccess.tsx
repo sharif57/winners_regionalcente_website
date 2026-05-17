@@ -53,9 +53,9 @@ export default function InvestmentSuccess({ projectData }: InvestmentSuccessProp
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[600px]">
-                <button className="flex-1 border border-[#E0E2E7] bg-white py-3.5 text-xs font-bold text-secondary uppercase tracking-widest hover:bg-gray-50 transition-colors">
+                <Link href="/dashboard/my-project" className="flex-1 border border-[#E0E2E7] bg-white py-3.5 text-center text-xs font-bold text-secondary uppercase tracking-widest hover:bg-gray-50 transition-colors">
                     VIEW MY PROJECT
-                </button>
+                </Link>
                 <Link href="/dashboard" className="flex-1">
                     <button className="w-full bg-[#C91E1E] py-3.5 text-xs font-bold text-white uppercase tracking-widest hover:bg-[#AD1717] transition-colors">
                         GO TO DASHBOARD

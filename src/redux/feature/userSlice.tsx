@@ -208,8 +208,24 @@ export const userApi = baseApi.injectEndpoints({
       invalidatesTags: ["User"],
     }),
 
+    getBlogList: builder.query({
+      query: (params) => ({
+        url: `/blogposts/`,
+        method: "GET",
+        params: params ?? undefined,
+      }),
+      providesTags: ["Blog"],
+    }),
+
+    getBlogDetails: builder.query({
+      query: (id) => ({
+        url: `/blogposts/${id}/`,
+        method: "GET",
+      }),
+      providesTags: (result, error, id) => [{ type: "Blog", id }],
+    }),
 
   }),
 });
 
-export const { useUserProfileQuery, useLazyUserProfileQuery, useUpdateProfileMutation } = userApi;
+export const { useUserProfileQuery, useLazyUserProfileQuery, useUpdateProfileMutation, useGetBlogListQuery, useGetBlogDetailsQuery } = userApi;

@@ -60,6 +60,9 @@ export default function Navbar() {
     const { data: userProfile } = useUserProfileQuery(undefined, {
         skip: !hasToken,
     });
+
+    console.log(userProfile, '=============')
+
     const profile = ((userProfile as { data?: ProfileData } | undefined)?.data ?? userProfile) as ProfileData | undefined;
 
     useEffect(() => {
