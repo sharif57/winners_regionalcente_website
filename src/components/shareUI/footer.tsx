@@ -2,6 +2,7 @@
 "use client";
 
 import { useSendEvaluationRequestMutation } from "@/redux/feature/evaluationSlice";
+import { useGetSettingsQuery } from "@/redux/feature/settingSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -11,7 +12,8 @@ import { toast } from "sonner";
 
 export default function Footer() {
     const [formData, setFormData] = useState({ name: "", email: "", note: "" });
-    const [submitted, setSubmitted] = useState(false);
+    const { data } = useGetSettingsQuery(undefined);
+    console.log(data?.data, 'footer');
 
 
     const nameInputRef = useRef<HTMLInputElement | null>(null);
@@ -47,7 +49,7 @@ export default function Footer() {
 
             {/* ── Main Content ── */}
             <div className="mx-auto w-full container     px-5 py-14 sm:px-8 lg:px-12">
-                <div className="flex flex-wrap gap-10 lg:gap-[200px]">
+                <div className="flex flex-wrap gap-10 lg:gap-50">
 
                     {/* ── Col 1: Brand Info ── */}
                     <div className="flex w-full flex-col gap-5 sm:w-auto sm:flex-1 sm:basis-60">
@@ -57,7 +59,7 @@ export default function Footer() {
                             width={178}
                             height={52}
                             priority
-                            className="h-auto w-[146px] sm:w-[160px] lg:w-[178px]"
+                            className="h-auto w-36.5 sm:w-40 lg:w-44.5"
                         />
 
                         <p className="text-sm leading-relaxed text-white">
@@ -89,11 +91,11 @@ export default function Footer() {
                     </div>
 
                     {/* ── Col 2: Evaluation Form ── */}
-                    <div className="flex w-full flex-col gap-4 sm:flex-1 sm:basis-72 lg:order-none">
+                    <div className="flex w-full flex-col gap-4 sm:flex-1 sm:basis-72 lg:order-0">
                         <h2 className="text-center font-['Playfair_Display'] text-[26px] font-normal italic text-white">
                             Request an Evaluation
                         </h2>
-                        <div className="mx-auto h-[3px] w-14 rounded-full bg-[#b91d1d]" />
+                        <div className="mx-auto h-0.75 w-14 rounded-full bg-[#b91d1d]" />
 
                         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                             {/* Name + Email row */}
@@ -154,11 +156,12 @@ export default function Footer() {
 
                         <nav className="flex flex-col gap-2">
                             {[
-                                { label: "About Us", href: "#" },
-                                { label: "How it works", href: "#" },
-                                { label: "Our Projects", href: "#" },
-                                { label: "EB-5 Program", href: "#" },
-                                { label: "Contact Us", href: "#" },
+                                { label: "About Us", href: "/about-us" },
+                                { label: "Privacy Policy", href: "/privacy-policy" },
+                                { label: "Terms of Use", href: "/terms-of-use" },
+                                { label: "Our Projects", href: "/explore-project" },
+                                { label: "EB-5 Program", href: "/eb-5-visa" },
+                                { label: "Contact Us", href: "/request-evaluation" },
                             ].map(({ label, href }) => (
                                 <Link
                                     key={label}
@@ -221,7 +224,7 @@ export default function Footer() {
             {/* ── Copyright Bar ── */}
             <div className="border-t border-[#2a3f5f] bg-[#0e1a2e] py-4">
                 <p className="text-center text-sm text-white">
-                    © {new Date().getFullYear()} The Winners Regional Center. All Rights Reserved.
+                    © {new Date().getFullYear()} Where Global Ambition Meets American Opportunity. All Rights Reserved.
                 </p>
             </div>
 
