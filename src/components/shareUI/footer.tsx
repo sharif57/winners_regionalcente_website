@@ -226,7 +226,7 @@ export default function Footer() {
                     <p>© 2026 Winners Regional Center, Dallas, Texas.</p>
                     <p>&lsquo;Where Global Ambition Meets American Opportunity&lsquo;</p>
                     <p>All Rights Reserved.</p>
-                    <p className="">Thanks, Noah</p>
+                    {/* <p className="">Thanks, Noah</p> */}
                 </div>
             </div>
 

@@ -30,7 +30,7 @@ export default function ManagementBanner() {
                     </p>
 
                     {/* Title */}
-                    <h1 className="text-white text-2xl lg:text-[60px] font-extrabold italic  leading-relaxed lg:leading-snug max-w-2xl lg:max-w-6xl">
+                    <h1 className="text-white text-2xl capitalize lg:text-[60px] font-extrabold italic  leading-relaxed lg:leading-snug max-w-2xl lg:max-w-6xl">
                         {title}
                     </h1>
 
