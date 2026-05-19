@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const initialTemplate = `
-Hi [First Name]
+Hi,
 
 Thanks for contacting the Winners Regional Center, Dallas, Texas about growing your investments in the near future. 
 
@@ -60,6 +60,8 @@ export default function Page() {
 
     return (
         <main className="min-h-screen bg-[#efefef] px-4 py-8 sm:px-6 md:py-10 lg:px-8 mt-14">
+
+            <title>Winners Regional Center - Request Evaluation</title>
             <section className="mx-auto w-full max-w-6xl">
                 <h1 className="mb-4 inline-block px-3 py-2 text-base font-medium italic text-[#1F1F1F] sm:mb-5 sm:text-[20px] md:text-[24px]">
                     Request Evaluation

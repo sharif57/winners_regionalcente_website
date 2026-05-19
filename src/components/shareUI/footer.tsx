@@ -13,7 +13,6 @@ import { toast } from "sonner";
 export default function Footer() {
     const [formData, setFormData] = useState({ name: "", email: "", note: "" });
     const { data } = useGetSettingsQuery(undefined);
-    console.log(data?.data, 'footer');
 
 
     const nameInputRef = useRef<HTMLInputElement | null>(null);
@@ -223,9 +222,12 @@ export default function Footer() {
 
             {/* ── Copyright Bar ── */}
             <div className="border-t border-[#2a3f5f] bg-[#0e1a2e] py-4">
-                <p className="text-center text-sm text-white">
-                    © {new Date().getFullYear()} Where Global Ambition Meets American Opportunity. All Rights Reserved.
-                </p>
+                <div className="text-center text-sm text-white">
+                    <p>© 2026 Winners Regional Center, Dallas, Texas.</p>
+                    <p>&lsquo;Where Global Ambition Meets American Opportunity&lsquo;</p>
+                    <p>All Rights Reserved.</p>
+                    <p className="">Thanks, Noah</p>
+                </div>
             </div>
 
         </footer>

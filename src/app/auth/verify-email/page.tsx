@@ -41,6 +41,25 @@ function VerifyEmailForm() {
         }
     };
 
+    const handlePaste = (index: number, e: React.ClipboardEvent<HTMLInputElement>) => {
+        const pasted = e.clipboardData.getData("text").replace(/\D/g, "");
+        if (!pasted) return;
+        e.preventDefault();
+
+        const newOtp = [...otp];
+        for (let i = 0; i < pasted.length && index + i < 6; i++) {
+            newOtp[index + i] = pasted[i];
+        }
+        setOtp(newOtp);
+
+        const nextPos = Math.min(6, index + pasted.length);
+        if (nextPos < 6) {
+            inputRefs.current[nextPos]?.focus();
+        } else {
+            inputRefs.current[5]?.focus();
+        }
+    };
+
     const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Backspace" && !otp[index] && index > 0) {
             inputRefs.current[index - 1]?.focus();
@@ -138,6 +157,7 @@ function VerifyEmailForm() {
                             value={otp[i]}
                             onChange={(e) => handleOtpChange(i, e.target.value)}
                             onKeyDown={(e) => handleKeyDown(i, e)}
+                            onPaste={(e) => handlePaste(i, e)}
                             disabled={isLoading}
                             className="w-12 h-16 md:w-16 md:h-20 bg-white border-none text-center text-2xl font-bold text-[#1F1F1F] focus:ring-2 focus:ring-[#F65353] outline-none transition-all shadow-sm disabled:opacity-50"
                         />
