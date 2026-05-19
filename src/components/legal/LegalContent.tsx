@@ -371,14 +371,7 @@ export default function LegalContent({ section }: { section: LegalSection }) {
                             </button>
                         </div>
                     ) : hasContent ? (
-                        /*
-                         * KEY TRICK:
-                         * "ql-editor" is Quill's own CSS class — importing
-                         * react-quill/dist/quill.snow.css applies all Snow theme
-                         * typography rules automatically.
-                         * "ql-editor-view" removes the editor border/padding
-                         * so it looks like a normal readable page.
-                         */
+                        
                         <div
                             className="ql-editor ql-editor-view"
                             dangerouslySetInnerHTML={{ __html: rawContent }}
