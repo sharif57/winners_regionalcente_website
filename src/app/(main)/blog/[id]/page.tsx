@@ -135,7 +135,7 @@ export default function BlogDetailsPage() {
                     Back to home
                 </Link>
 
-                <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.72fr)] lg:items-start">
+                <section className="mt-8  lg:items-start">
                     <div className="space-y-8">
                         <header className="overflow-hidden rounded-[2rem] border border-[#E8D9D2] bg-white/90 shadow-[0_24px_80px_rgba(25,22,20,0.08)] backdrop-blur">
                             {blog.featured_image ? (
@@ -263,7 +263,7 @@ export default function BlogDetailsPage() {
                                 }
                             `}</style>
 
-                            <div className="blog-content">
+                            <div className=" w-full max-w-full">
                                 {contentLooksLikeHtml(blog.content) ? (
                                     <div dangerouslySetInnerHTML={{ __html: blog.content ?? "" }} />
                                 ) : (
@@ -273,42 +273,7 @@ export default function BlogDetailsPage() {
                         </article>
                     </div>
 
-                    <aside className="space-y-6 lg:sticky lg:top-8">
-                        <div className="rounded-[2rem] border border-[#E8D9D2] bg-white/95 p-6 shadow-[0_24px_80px_rgba(25,22,20,0.08)] backdrop-blur">
-                            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">Article details</p>
 
-                            <dl className="mt-5 space-y-4 text-sm text-accent">
-                                <div className="flex items-start justify-between gap-4 border-b border-dashed border-[#E8D9D2] pb-4">
-                                    <dt className="font-semibold text-secondary">Published</dt>
-                                    <dd className="text-right">{formatDate(blog.created_at)}</dd>
-                                </div>
-                                <div className="flex items-start justify-between gap-4 border-b border-dashed border-[#E8D9D2] pb-4">
-                                    <dt className="font-semibold text-secondary">Reading time</dt>
-                                    <dd className="text-right">{readTime}</dd>
-                                </div>
-                                {/* <div className="flex items-start justify-between gap-4 border-b border-dashed border-[#E8D9D2] pb-4">
-                                    <dt className="font-semibold text-secondary">Format</dt>
-                                    <dd className="text-right">HTML ready</dd>
-                                </div> */}
-                                <div className="flex items-start justify-between gap-4">
-                                    <dt className="font-semibold text-secondary">Source</dt>
-                                    <dd className="text-right">Featured update</dd>
-                                </div>
-                            </dl>
-                        </div>
-
-                        <div className="overflow-hidden rounded-[2rem] border border-[#E8D9D2] bg-[#121E38] text-white shadow-[0_24px_80px_rgba(25,22,20,0.14)]">
-                            <div className="p-6">
-                                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#F7C9C9]">Quick take</p>
-                                <p className="mt-4 text-lg font-semibold leading-8">
-                                    This layout gives the blog a polished magazine feel, with the image treated as a true hero banner.
-                                </p>
-                                <p className="mt-4 text-sm leading-7 text-white/75">
-                                    The article body stays readable, the metadata feels organized, and the page now supports both HTML and plain text content cleanly.
-                                </p>
-                            </div>
-                        </div>
-                    </aside>
 
                 </section>
             </div>
