@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Winners Region Center",
+  title: "Winners Regional Center",
   description: "A platform connecting investors with promising startups in the MENA region, fostering growth and innovation.",
 };
 
