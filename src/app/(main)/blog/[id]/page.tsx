@@ -137,7 +137,7 @@ export default function BlogDetailsPage() {
 
                 <section className="mt-8  lg:items-start">
                     <div className="space-y-8">
-                        <header className="overflow-hidden rounded-[2rem] border border-[#E8D9D2] bg-white/90 shadow-[0_24px_80px_rgba(25,22,20,0.08)] backdrop-blur">
+                        <header className="overflow-hidden  border border-[#E8D9D2] bg-white/90 shadow-[0_24px_80px_rgba(25,22,20,0.08)] backdrop-blur">
                             {blog.featured_image ? (
                                 <div className="relative aspect-video w-full bg-[#E8D9D2]">
                                     <Image
@@ -148,12 +148,12 @@ export default function BlogDetailsPage() {
                                         className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-linear-to-t from-[#0F172A]/60 via-transparent to-transparent" />
-                                    <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-8">
+                                    {/* <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-8">
                                         <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#A51D1D] backdrop-blur">
                                             <Sparkles className="h-3.5 w-3.5" />
                                             Featured Article
                                         </span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             ) : null}
 
@@ -169,10 +169,7 @@ export default function BlogDetailsPage() {
                                         <CalendarDays className="h-4 w-4" />
                                         {formatDate(blog.created_at)}
                                     </span>
-                                    <span className="inline-flex items-center gap-2 rounded-full bg-[#F7F1EF] px-4 py-2 text-secondary">
-                                        <Clock3 className="h-4 w-4" />
-                                        {readTime}
-                                    </span>
+                                    
                                 </div>
 
                                 <h1 className="mt-6 max-w-4xl italic text-4xl font-semibold leading-[1.05] tracking-tight text-secondary md:text-5xl lg:text-6xl">
@@ -187,13 +184,9 @@ export default function BlogDetailsPage() {
                             </div>
                         </header>
 
-                        <article className="rounded-[2rem] border border-[#E8D9D2] bg-white/95 p-7 shadow-[0_24px_80px_rgba(25,22,20,0.08)] md:p-10">
+                        <article className=" border border-[#E8D9D2] bg-white/95 p-7 shadow-[0_24px_80px_rgba(25,22,20,0.08)] md:p-10">
                             <div className="mb-6 flex items-center gap-3 border-b border-[#EFE2DC] pb-5">
-                                <div className="h-10 w-10 rounded-full bg-[linear-gradient(135deg,#b91d1d,#ef4444)] shadow-[0_12px_30px_rgba(185,29,29,0.24)]" />
-                                <div>
-                                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Article body</p>
-                                    <p className="text-sm text-accent">Formatted for readable HTML or plain text content</p>
-                                </div>
+                               
                             </div>
 
                             <style>{`
