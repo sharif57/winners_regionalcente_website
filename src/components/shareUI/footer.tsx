@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useSendEvaluationRequestMutation } from "@/redux/feature/evaluationSlice";
-import { useGetSettingsQuery } from "@/redux/feature/settingSlice";
+import { useContactMutation } from "@/redux/feature/evaluationSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -12,12 +11,11 @@ import { toast } from "sonner";
 
 export default function Footer() {
     const [formData, setFormData] = useState({ name: "", email: "", note: "" });
-    const { data } = useGetSettingsQuery(undefined);
 
 
     const nameInputRef = useRef<HTMLInputElement | null>(null);
 
-    const [sendEvaluationRequest, { isLoading }] = useSendEvaluationRequestMutation();
+    const [contact, { isLoading }] = useContactMutation();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -30,10 +28,12 @@ export default function Footer() {
                 email: formData.email,
                 message: formData.note,
             }
-            const response = await sendEvaluationRequest(data).unwrap();
-            toast.success(response?.message || "Evaluation request submitted successfully!");
+            const response = await contact(data).unwrap();
+            toast.success(response?.message || "contact submitted successfully!");
+            setFormData({ name: "", email: "", note: "" });
+            nameInputRef.current?.focus();
         } catch (error: any) {
-            toast.error(error?.message || "Failed to submit evaluation request.");
+            toast.error(error?.message || "Failed to submit contact request.");
         }
     };
 
@@ -87,12 +87,23 @@ export default function Footer() {
                                 1-214-916-8282
                             </Link>
                         </div>
+                        {/* <div className="flex flex-col gap-1">
+                            <h3 className="font-['Playfair_Display'] text-base font-bold italic text-white">
+                                Email
+                            </h3>
+                            <Link
+                                href="mailto:wrc@winnersregionalcenter.com"
+                                className="text-sm text-white transition-colors hover:text-[#b91d1d]"
+                            >
+                                wrc@winnersregionalcenter.com
+                            </Link>
+                        </div> */}
                     </div>
 
-                    {/* ── Col 2: Evaluation Form ── */}
+                    {/* ── Col 2: Contact Form ── */}
                     <div className="flex w-full flex-col gap-4 sm:flex-1 sm:basis-72 lg:order-0">
                         <h2 className="text-center font-['Playfair_Display'] text-[26px] font-normal italic text-white">
-                            Request an Evaluation
+                            Talk to Us
                         </h2>
                         <div className="mx-auto h-0.75 w-14 rounded-full bg-[#b91d1d]" />
 
@@ -107,7 +118,7 @@ export default function Footer() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     autoComplete="name"
-                                    className="h-12 w-full rounded-lg border border-white/25 bg-transparent px-4 text-sm text-white placeholder-[#8fa3bf] outline-none transition-all focus:border-[#b91d1d] focus:ring-2 focus:ring-[#b91d1d]/20"
+                                    className="h-12 w-full  border border-white/25 bg-transparent px-4 text-sm text-white placeholder-[#8fa3bf] outline-none transition-all focus:border-[#b91d1d] focus:ring-2 focus:ring-[#b91d1d]/20"
                                     required
                                 />
                                 <input
@@ -117,7 +128,7 @@ export default function Footer() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     autoComplete="email"
-                                    className="h-12 w-full rounded-lg border border-white/25 bg-transparent px-4 text-sm text-white placeholder-[#8fa3bf] outline-none transition-all focus:border-[#b91d1d] focus:ring-2 focus:ring-[#b91d1d]/20"
+                                    className="h-12 w-full border border-white/25 bg-transparent px-4 text-sm text-white placeholder-[#8fa3bf] outline-none transition-all focus:border-[#b91d1d] focus:ring-2 focus:ring-[#b91d1d]/20"
                                     required
                                 />
                             </div>
@@ -129,7 +140,7 @@ export default function Footer() {
                                 value={formData.note}
                                 onChange={handleChange}
                                 rows={4}
-                                className="w-full resize-none rounded-lg border border-white/25 bg-transparent px-4 py-3 text-sm text-white placeholder-[#8fa3bf] outline-none transition-all focus:border-[#b91d1d] focus:ring-2 focus:ring-[#b91d1d]/20"
+                                className="w-full resize-none  border border-white/25 bg-transparent px-4 py-3 text-sm text-white placeholder-[#8fa3bf] outline-none transition-all focus:border-[#b91d1d] focus:ring-2 focus:ring-[#b91d1d]/20"
                                 required
                             />
 

@@ -33,6 +33,16 @@ const settingSlice = baseApi.injectEndpoints({
       invalidatesTags: ["Evaluation"],
   }),
 
+  // /contact/
+  contact: builder.mutation({
+    query: (data) => ({
+      url: `/contact/`,
+      method: "POST",
+      body: data,
+    }),
+    invalidatesTags: ["Evaluation"],
+  }),
+
   
 
   }),
@@ -42,4 +52,5 @@ export const {
   useSendEvaluationRequestMutation,
   useGetUserDashboardQuery,
   useProjectInvestmentsMutation,
+  useContactMutation,
 } = settingSlice;

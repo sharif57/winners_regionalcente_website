@@ -26,7 +26,7 @@ const sections: Section[] = [
         heading: "Family Migration To The United States",
         paragraphs: [
             "The EB-5 visa program was created by Congress in 1990 to stimulate the U.S. economy by attracting foreign investment and creating jobs. The EB-5 visa program is a citizen-investor program, which means that the investor and their qualifying family members are eligible to live and work in the United States.",
-            "Currently, standard investment amount is $1.05 and $800,000 for Targeted Employment Area (TEA). TEA program is for investment in high-unemployment areas or rural areas, and special interest areas. The EB-5 program currently allows for the minimum investment of $800,000 in those areas.",
+            "Currently, standard investment amount is $1.05 Million and $800,000 for Targeted Employment Area (TEA). TEA program is for investment in high-unemployment areas or rural areas, and special interest areas. The EB-5 program currently allows for the minimum investment of $800,000 in those areas.",
             "After two years, if the investment has met the job creation or preservation requirements, the investor and family members are granted permanent residents status, then they can expect a five year path to become citizens. Processing of EB-5 visas typically takes about 3 to 12 months.",
         ],
         image: "/image/image.png",
@@ -108,11 +108,11 @@ function SectionBlock({ section }: { section: Section }) {
     return (
         <section className={`px-4 py-12 lg:px-0 lg:py-10 ${bgColor ?? ""} ${border ?? ""}`}>
             <div
-                className={`mx-auto flex max-w-[1240px] flex-col items-center gap-10 lg:gap-20
+                className={`mx-auto flex max-w-310 flex-col items-center gap-10 lg:gap-20
                     ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"}`}
             >
                 {/* Image */}
-                <div className="relative h-[350px] w-full overflow-hidden rounded-sm sm:h-[450px] lg:h-[770px] lg:w-1/2">
+                <div className="relative h-87.5 w-full overflow-hidden rounded-sm sm:h-112.5 lg:h-192.5 lg:w-1/2">
                     <Image
                         src={image}
                         alt={imageAlt}
@@ -159,6 +159,12 @@ function SectionBlock({ section }: { section: Section }) {
 // ── Main Component ───────────────────────────────────────────────────────────
 
 export default function Family() {
+    const handleReachOutClick = () => {
+        document.getElementById("reachout")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        })
+    }
 
     return (
         <div>
@@ -172,7 +178,11 @@ export default function Family() {
                     <h2 className="mb-10 text-2xl font-semibold italic leading-tight text-secondary sm:text-3xl lg:text-[28px]">
                         Begin your EB-5 journey to US Permanent Residency for your family by getting expert advice.
                     </h2>
-                    <button  className="bg-primary px-12 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#9f1717] sm:text-base">
+                    <button
+                        type="button"
+                        onClick={handleReachOutClick}
+                        className="bg-primary px-12 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#9f1717] sm:text-base"
+                    >
                         REACHOUT NOW
                     </button>
                 </div>

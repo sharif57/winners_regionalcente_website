@@ -34,7 +34,7 @@ export const useBanner = (type: BannerType = "home"): BannerData => {
     },
     eb5: {
       tagline: "EB-5 Immigration",
-      title: "What is eb-5 visa?",
+      title: "What is EB-5 Visa?",
       description: "A step-by-step guide to securing U.S. permanent residency through investment",
       primaryButton: {
         label: "DOWNLOAD THE EB-5 PROCESS",
