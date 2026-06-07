@@ -169,7 +169,10 @@ export default function BlogDetailsPage() {
                                         <CalendarDays className="h-4 w-4" />
                                         {formatDate(blog.created_at)}
                                     </span>
-                                    
+                                    <span className="inline-flex items-center gap-2 rounded-full bg-[#F7F1EF] px-4 py-2 text-secondary">
+                                        <Clock3 className="h-4 w-4" />
+                                        {readTime}
+                                    </span>
                                 </div>
 
                                 <h1 className="mt-6 max-w-4xl italic text-4xl font-semibold leading-[1.05] tracking-tight text-secondary md:text-5xl lg:text-6xl">
@@ -186,7 +189,7 @@ export default function BlogDetailsPage() {
 
                         <article className=" border border-[#E8D9D2] bg-white/95 p-7 shadow-[0_24px_80px_rgba(25,22,20,0.08)] md:p-10">
                             <div className="mb-6 flex items-center gap-3 border-b border-[#EFE2DC] pb-5">
-                               
+
                             </div>
 
                             <style>{`
@@ -194,6 +197,13 @@ export default function BlogDetailsPage() {
                                     color: #364152;
                                     font-size: 17px;
                                     line-height: 1.95;
+                                    inline-size: 100%;
+                                    max-inline-size: none;
+                                }
+
+                                .blog-content > * {
+                                    inline-size: 100%;
+                                    max-inline-size: 100%;
                                 }
 
                                 .blog-content > * + * {
@@ -216,7 +226,8 @@ export default function BlogDetailsPage() {
 
                                 .blog-content p {
                                     margin: 0;
-                                    max-inline-size: 72ch;
+                                    max-inline-size: none;
+                                    inline-size: 100%;
                                 }
 
                                 .blog-content ul,
@@ -256,7 +267,7 @@ export default function BlogDetailsPage() {
                                 }
                             `}</style>
 
-                            <div className=" w-full max-w-full">
+                            <div className="blog-content w-full">
                                 {contentLooksLikeHtml(blog.content) ? (
                                     <div dangerouslySetInnerHTML={{ __html: blog.content ?? "" }} />
                                 ) : (
