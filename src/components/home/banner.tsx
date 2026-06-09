@@ -42,16 +42,24 @@ export default function Banner() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-8 pt-4">
             <Button
-              className="w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-10 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105 border-none"
-            >
-              <Link href={primaryButton.href}>{primaryButton.label}</Link>
-            </Button>
-
-            <Button
               variant="outline"
               className="w-full sm:w-auto border-[#BABABA] border text-white bg-transparent hover:bg-white hover:text-black px-10 py-7 text-base font-bold rounded-none transition-all duration-300 backdrop-blur-sm"
             >
               <Link href={secondaryButton.href}>{secondaryButton.label}</Link>
+            </Button>
+
+
+            <Button
+              className="w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-10 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105 border-none"
+            >
+              <a
+                href="/image/EB-5_2026CPG.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                {primaryButton.label}
+              </a>
             </Button>
           </div>
         </div>

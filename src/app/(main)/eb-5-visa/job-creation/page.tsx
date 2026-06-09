@@ -92,7 +92,7 @@ export default function JobCreator() {
                                             placeholder="Full name"
                                             value={fullName}
                                             onChange={(e) => setFullName(e.target.value)}
-                                            className="w-full rounded-sm border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
+                                            className="w-full  border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
                                             required
                                         />
                                         <input
@@ -100,7 +100,7 @@ export default function JobCreator() {
                                             placeholder="Phone number"
                                             value={phone}
                                             onChange={(e) => setPhone(e.target.value)}
-                                            className="w-full rounded-sm border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
+                                            className="w-full  border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
                                         />
                                     </div>
 
@@ -109,7 +109,7 @@ export default function JobCreator() {
                                         placeholder="Email address"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full rounded-sm border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
+                                        className="w-full  border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
                                         required
                                     />
 
@@ -118,7 +118,7 @@ export default function JobCreator() {
                                         value={question}
                                         onChange={(e) => setQuestion(e.target.value)}
                                         rows={4}
-                                        className="w-full resize-y rounded-sm border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
+                                        className="w-full resize-y  border border-[#d7d7d7] bg-white px-3 py-2 text-sm text-[#222] outline-none focus:border-[#e64040]"
                                     />
 
                                     <button

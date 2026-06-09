@@ -56,10 +56,16 @@ export default function VisaBanner() {
                         <h1 className="text-white text-[22px]  leading-relaxed lg:leading-snug font-medium max-w-2xl lg:max-w-6xl">
                             {description}
                         </h1>
+                        <div className='flex items-center gap-10 justify-center mt-4 '>
+                            {/* <ul> */}
+                            <li className="text-white">Rural TEA processing</li>
+                            <li className="text-white">Priority l-526 Processing</li>
+                            {/* </ul> */}
+                        </div>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-8 pt-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 lg:gap-8 pt-">
                         <Button
                             onClick={handleDownloadProcessImage}
                             className="w-full sm:w-auto bg-[#C51D1D] hover:bg-[#A31818] text-white px-10 py-7 text-base font-bold rounded-none transition-all duration-300 transform hover:scale-105 border-none"
