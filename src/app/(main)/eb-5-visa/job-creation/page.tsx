@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { useSubmitJcFormMutation } from "@/redux/feature/userSlice";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -28,21 +29,28 @@ export default function JobCreator() {
     const [question, setQuestion] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    const [submitJcForm] = useSubmitJcFormMutation();
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
 
         try {
+            const data = {
+                name: fullName,
+                email: email,
+                phone: phone,
+                message: question,
+            };
 
-
-
-            toast.success("Your request has been submitted successfully!");
+            const response = await submitJcForm(data).unwrap();
+            toast.success(response?.message || "Your request has been submitted successfully!");
             setFullName("");
             setPhone("");
             setEmail("");
             setQuestion("");
         } catch (error: any) {
-            toast.error("Failed to submit. Please try again.");
+            toast.error(error?.data?.message || error?.message || "Failed to submit. Please try again.");
         } finally {
             setIsLoading(false);
         }

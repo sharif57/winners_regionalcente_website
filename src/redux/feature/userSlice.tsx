@@ -225,7 +225,18 @@ export const userApi = baseApi.injectEndpoints({
       providesTags: (result, error, id) => [{ type: "Blog", id }],
     }),
 
+    // /jc-form-submit/
+    submitJcForm: builder.mutation({
+      query: (data) => ({
+        url: "/jc-form-submit/",
+        method: "POST",
+        body: data,
+        formData: true,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
   }),
 });
 
-export const { useUserProfileQuery, useLazyUserProfileQuery, useUpdateProfileMutation, useGetBlogListQuery, useGetBlogDetailsQuery } = userApi;
+export const { useUserProfileQuery, useLazyUserProfileQuery, useUpdateProfileMutation, useGetBlogListQuery, useGetBlogDetailsQuery, useSubmitJcFormMutation } = userApi;

@@ -1,38 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import ReusableHeader from "@/hook/resuable-header";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    question: "What is the EB-5 Immigrant Investor Program?",
-    answer: "The EB-5 program allows foreign investors to obtain U.S. permanent residency (Green Card) by investing in qualified projects that create jobs for the U.S. economy.",
+    question: "What is the W.I.N. Standard in EB-5 investing?",
+    answer: "The W.I.N. Standard is a safety-first investment framework created by Winners Regional Center. It stands for Wealth Protection, Immigration Success, and Negligible Risk. This standard guarantees that an EB-5 project is structured entirely without senior bank debt, eliminating bank foreclosure risks and protecting both your capital and your path to a U.S. Green Card.",
   },
   {
-    question: "How much do I need to invest?",
-    answer: "The minimum investment is typically $800,000 for projects in Targeted Employment Areas (TEAs) or $1,050,000 otherwise.",
+    question: "How does a loan-free project protect my EB-5 green card application?",
+    answer: "In traditional EB-5 projects, construction relies heavily on senior bank loans. If a bank freezes funding due to market shifts, construction stalls. This halts the creation of the required 10 permanent jobs per investor, leading to a denial of your I-526E or I-829 petition. Because Winners Regional Center projects are loan-free, construction timelines are independent of bank volatility, ensuring stable job creation and immigration security.",
   },
   {
-    question: "How long does the EB-5 process take?",
-    answer: "Processing times vary, but the EB-5 journey typically includes petition approval, conditional residency, and eventual permanent residency over several years.",
+    question: "Why does Winners Regional Center build without senior bank loans?",
+    answer: "We eliminate senior bank loans to remove foreclosure risk. In bank-led projects, the bank holds the first lien and can seize the property if financial covenants are missed, wiping out subordinate EB-5 investors. By funding projects exclusively through developer equity and EB-5 capital, our investors hold unmatched security over the project assets.",
   },
   {
-    question: "Can my family be included in the application?",
-    answer: "Yes, the investor, their spouse, and unmarried children under 21 are eligible for green cards through a single investment.",
+    question: "What makes the Texas economy ideal for EB-5 job creators?",
+    answer: "The Texas economy, particularly the Dallas-Fort Worth metroplex, leads the United States in job growth, corporate relocations, and population influx. This continuous economic expansion ensures that real estate developments like the Winners Tower enjoy high demand, stable valuations, and robust operational success, making it the safest environment for job creation.",
   },
   {
-    question: "Is my investment guaranteed?",
-    answer: "By law, the investment must be 'at risk' to qualify for the EB-5 program, meaning no regional center can guarantee a return of capital.",
-  },
-  {
-    question: "What happens after I receive my conditional Green Card?",
-    answer: "You will hold conditional residency for two years, after which you must file a petition to remove conditions and receive a permanent Green Card.",
-  },
-  {
-    question: "Do I need to actively manage the investment?",
-    answer: "Most EB-5 investors in regional center projects are passive limited partners, allowing them to live and work anywhere in the U.S.",
+    question: "What happens to my EB-5 investment if the market downturns?",
+    answer: "Because our loan-free framework operates without commercial bank debt, our projects face no pressure from sudden interest rate hikes, loan recalls, or strict refinancing deadlines. The project can weather economic cycles smoothly, protecting investor equity and ensuring construction reaches completion to secure your permanent green card.",
   },
 ];
 
