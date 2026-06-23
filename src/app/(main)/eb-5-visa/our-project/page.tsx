@@ -124,9 +124,12 @@ export default function ProjectsSection() {
                                     )}
                                 </div>
 
-                                <p className="text-[#696969] text-base font-normal leading-relaxed grow">
-                                    {project.short_description?.slice(0, 100)}...
-                                </p>
+                                <div 
+                                    className="text-[#696969] text-base font-normal leading-relaxed grow line-clamp-3"
+                                    dangerouslySetInnerHTML={{ 
+                                        __html: project.short_description || "No description available." 
+                                    }}
+                                />
 
                                 <div className="pt-4">
                                     {project.status.toLowerCase() === "completed" ? (

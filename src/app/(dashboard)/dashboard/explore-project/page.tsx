@@ -171,9 +171,12 @@ export default function ExploreProjectPage() {
                                     )}
                                 </div>
 
-                                <p className="text-[#696969] text-base font-normal leading-relaxed grow">
-                                    {project.short_description}
-                                </p>
+                                <div 
+                                    className="text-[#696969] text-base font-normal leading-relaxed grow line-clamp-3"
+                                    dangerouslySetInnerHTML={{ 
+                                        __html: project.short_description || "No description available." 
+                                    }}
+                                />
 
                                 <div className="pt-4">
                                     <Button

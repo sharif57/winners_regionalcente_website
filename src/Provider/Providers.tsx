@@ -29,11 +29,14 @@ function AuthRouteGuard({ children }: { children: React.ReactNode }) {
     skip: !token,
   });
 
+  const profileData = profileResponse && typeof profileResponse === "object" && "data" in profileResponse 
+    ? (profileResponse as { data?: { complete_profile?: boolean, role?: string } }).data 
+    : null;
+
   const isProfileComplete = Boolean(
-    profileResponse &&
-    typeof profileResponse === "object" &&
-    "data" in profileResponse &&
-    (profileResponse as { data?: { complete_profile?: boolean } }).data?.complete_profile
+    profileData?.complete_profile || 
+    profileData?.role === "user" || 
+    profileData?.role === "admin"
   );
 
   const shouldRedirectToArrangement = Boolean(token) && !isProfileLoading && !isProfileComplete && isDashboardRoute;

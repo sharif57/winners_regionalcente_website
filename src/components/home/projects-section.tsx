@@ -160,9 +160,12 @@ export default function ProjectsSection() {
                     )}
                   </div>
 
-                  <p className="text-[#696969] text-base font-normal leading-relaxed flex-grow">
-                    {project.short_description?.slice(0, 100) || "No description available."}
-                  </p>
+                  <div 
+                    className="text-[#696969] text-base font-normal leading-relaxed flex-grow line-clamp-3"
+                    dangerouslySetInnerHTML={{ 
+                      __html: project.short_description || "No description available." 
+                    }}
+                  />
 
                   <div className="pt-4">
                     {isCompleted ? (

@@ -191,7 +191,7 @@ export default function ProjectPage() {
                                     priority={project.id <= 2}
                                 />
 
-                                <div className="flex-1">
+                                <div className="flex-1 min-w-0">
                                     <div className="mb-4 flex  items-center justify-between gap-3">
                                         <h3 className="max-w-97.5 text-xl leading-[1.18] font-bold italic text-[#1F1F1F] uppercase sm:text-[25px]">
                                             {project.title}
@@ -203,9 +203,12 @@ export default function ProjectPage() {
                                         </span>
                                     </div>
 
-                                    <p className="mb-4 max-w-125 text-[14px] leading-[1.35] text-[#636363] sm:text-base">
-                                        {project.description}
-                                    </p>
+                                    <div 
+                                        className="mb-4 max-w-125 text-[14px] leading-[1.35] text-[#636363] sm:text-base line-clamp-3 [&>p]:inline"
+                                        dangerouslySetInnerHTML={{ 
+                                            __html: project.description || "No description available." 
+                                        }}
+                                    />
 
                                     <div className="mb-5 flex flex-wrap items-center gap-y-3 text-[12px] text-[#6B6B6B] uppercase sm:text-[16px]">
                                         <div className="pr-4">

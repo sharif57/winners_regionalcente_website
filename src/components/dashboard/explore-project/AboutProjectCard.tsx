@@ -12,7 +12,7 @@ export default function AboutProjectCard({
     details = "The development aims to support the city&apos;s expanding population and business ecosystem by offering state-of-the-art infrastructure, sustainable design, and strong connectivity to key commercial and transportation hubs. With its contemporary architecture and thoughtfully planned amenities, the project is structured to create long-term value for investors and the surrounding community.",
 }: AboutProjectCardProps) {
     return (
-        <article className="rounded-md bg-[#E8E9EC52] p-4 sm:p-6 xl:col-span-7">
+        <article className="rounded-md bg-[#E8E9EC52] p-4 sm:p-6 xl:col-span-7 min-w-0 overflow-hidden">
             <p className="mb-2 text-base text-[#F65353] font-normal">| ABOUT PROJECT</p>
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                 <h1 className="text-[34px] leading-tight font-semibold italic text-secondary sm:text-[36px]">
@@ -22,9 +22,12 @@ export default function AboutProjectCard({
                     {status}
                 </span>
             </div>
-            <p className="mb-4 text-[14px] leading-relaxed text-[#696969] sm:text-[18px] font-normal">
-                {summary}
-            </p>
+            <div
+                className="mb-4 text-[14px] leading-relaxed text-[#696969] sm:text-[18px] font-normal break-words [&_*]:break-words"
+                dangerouslySetInnerHTML={{
+                    __html: summary || "No description available."
+                }}
+            />
             <p className="text-[14px] leading-relaxed text-[#696969] sm:text-[18px] font-normal">
                 {details}
             </p>
