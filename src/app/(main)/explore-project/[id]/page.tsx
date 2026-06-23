@@ -8,6 +8,7 @@ import ProjectTimelineCard from "@/components/dashboard/explore-project/ProjectT
 import TopStatsBar from "@/components/dashboard/explore-project/TopStatsBar";
 import { DocumentItem, TopStat } from "@/components/dashboard/explore-project/types";
 import ProjectHero from "@/components/visa/project/ProjectHero";
+import ExploreProjectSkeleton from "@/components/dashboard/explore-project/ExploreProjectSkeleton";
 import { useProjectDetailsQuery } from "@/redux/feature/projectSlice";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -58,9 +59,13 @@ export default function ExploreProject() {
     const id = Array.isArray(params.id) ? params.id[0] : params.id;
     const projectId = Number(id);
 
-    const { data } = useProjectDetailsQuery(projectId, {
+    const { data, isLoading } = useProjectDetailsQuery(projectId, {
         skip: Number.isNaN(projectId),
     });
+
+    if (isLoading) {
+        return <ExploreProjectSkeleton />;
+    }
 
     const project = data?.data;
     console.log(project, '=========')
