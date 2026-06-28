@@ -40,11 +40,11 @@ const navItems: NavItem[] = [
         dropdown: [
             { label: "EB-5 Immigration", href: "/eb-5-visa" },
             { label: "Our Projects", href: "/eb-5-visa/our-project" },
-            { label: "Job Creation", href: "/eb-5-visa/job-creation" },
+            { label: "Job Creator", href: "/eb-5-visa/job-creation" },
         ],
     },
     { label: "Wealth Management", href: "/wealth-management" },
-    { label: "FAQ", href: "/#faq" },
+    { label: "FAQ", href: "/faq" },
 ];
 
 export default function Navbar() {
