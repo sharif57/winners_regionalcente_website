@@ -51,7 +51,7 @@ function formatDate(value?: string | null) {
 export default function NewsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { data } = useGetBlogListQuery(undefined) as { data?: BlogListResponse };
+  const { data } = useGetBlogListQuery({ category: "others" }) as { data?: BlogListResponse };
   const newsItems = data?.data ?? [];
 
   const totalItems = newsItems.length;

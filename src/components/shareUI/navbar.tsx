@@ -32,6 +32,7 @@ const navItems: NavItem[] = [
         dropdown: [
             { label: "About Us", href: "/#about" },
             { label: "News & Insights", href: "/#news-insights" },
+            { label: 'Industry Updates', href: '/about-us/industry-reports' },
         ],
     },
     {
@@ -44,7 +45,13 @@ const navItems: NavItem[] = [
         ],
     },
     { label: "Wealth Management", href: "/wealth-management" },
-    { label: "FAQ", href: "/faq" },
+    {
+        label: "FAQ", href: "/faq",
+        dropdown: [
+            { label: "FAQ", href: "/faq" },
+            { label: "Resources", href: "/faq/resources" },
+        ],
+    },
 ];
 
 export default function Navbar() {
