@@ -155,6 +155,37 @@ export default function Footer() {
                                 {isLoading ? "✓ Message Sent!" : "Connect Now"}
                             </button>
                         </form>
+
+                        <div className="mt-4 flex flex-col items-center gap-3">
+                            <span className="font-['Playfair_Display'] text-xl font-normal italic text-white">
+                                Connect with Us
+                            </span>
+                            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
+                                {[
+                                    { href: "https://www.facebook.com/profile.php?id=61582209998376", icon: <FaFacebookF size={14} />, label: "Facebook" },
+                                    { href: "https://www.youtube.com/@capitalfinancewinners", icon: <FaYoutube size={14} />, label: "YouTube" },
+                                    { href: "https://www.tiktok.com/@winners6823", icon: <FaTiktok size={14} />, label: "TikTok" },
+                                    { href: "https://www.linkedin.com/in/winners-capital-finance-a46922405", icon: <FaLinkedin size={14} />, label: "LinkedIn" },
+                                    { href: "https://x.com/RaphaelWinners", icon: <FaXTwitter size={14} />, label: "X" },
+                                    { href: "https://www.lekeelekee.com/u/raphael_8536", icon: <FaGlobe size={14} />, label: "LekeeLekee" },
+                                ].map(({ href, icon, label }) => (
+                                    <Link
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group flex items-center gap-2.5 text-sm text-white transition-all duration-300 hover:translate-x-0.5"
+                                    >
+                                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-all duration-300 group-hover:border-[#b91d1d] group-hover:bg-[#b91d1d] group-hover:shadow-md group-hover:shadow-[#b91d1d]/20">
+                                            {icon}
+                                        </span>
+                                        <span className="truncate transition-colors duration-300 group-hover:text-[#b91d1d]">
+                                            {label}
+                                        </span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     {/* ── Col 3: Important Links ── */}
@@ -183,37 +214,6 @@ export default function Footer() {
                                 </Link>
                             ))}
                         </nav>
-                        <div className="flex flex-col gap-4">
-                            <h3 className="font-['Playfair_Display'] text-xl font-normal italic text-white">
-                                Social Links
-                            </h3>
-                            <div className="h-0.5 w-10 rounded-full bg-[#b91d1d]" />
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                                {[
-                                    { href: "https://www.facebook.com/profile.php?id=61582209998376", icon: <FaFacebookF size={14} />, label: "Facebook" },
-                                    { href: "https://www.youtube.com/@capitalfinancewinners", icon: <FaYoutube size={14} />, label: "YouTube" },
-                                    { href: "https://www.tiktok.com/@winners6823", icon: <FaTiktok size={14} />, label: "TikTok" },
-                                    { href: "https://www.linkedin.com/in/winners-capital-finance-a46922405", icon: <FaLinkedin size={14} />, label: "LinkedIn" },
-                                    { href: "https://x.com/RaphaelWinners", icon: <FaXTwitter size={14} />, label: "X" },
-                                    { href: "https://www.lekeelekee.com/u/raphael_8536", icon: <FaGlobe size={14} />, label: "LekeeLekee" },
-                                ].map(({ href, icon, label }) => (
-                                    <Link
-                                        key={label}
-                                        href={href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group flex items-center gap-2.5 text-sm text-white transition-all duration-300 hover:translate-x-1"
-                                    >
-                                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-all duration-300 group-hover:border-[#b91d1d] group-hover:bg-[#b91d1d] group-hover:shadow-md group-hover:shadow-[#b91d1d]/20">
-                                            {icon}
-                                        </span>
-                                        <span className="truncate transition-colors duration-300 group-hover:text-[#b91d1d]">
-                                            {label}
-                                        </span>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
                     </div>
 
                 </div>
