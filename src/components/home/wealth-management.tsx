@@ -50,12 +50,13 @@ export default function WealthManagement() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-[50px] items-center">
 
           {/* Left Column: Hero Image */}
-          <div className="w-full lg:w-1/2 relative aspect-[4/5] overflow-hidden group">
+          <div className="w-full max-w-[400px] md:max-w-[480px] lg:max-w-none lg:w-1/2 mx-auto relative aspect-[2/3] overflow-hidden group">
             <Image
-              src="/image/men.png"
+              // src="/image/men.png"
+              src="/image/ADSA_Ann.png"
               alt="Strategic Wealth Planning"
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
           </div>
 
