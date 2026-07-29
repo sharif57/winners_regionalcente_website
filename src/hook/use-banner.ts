@@ -15,7 +15,7 @@ export interface BannerData {
   backgroundImage: string;
 }
 
-export type BannerType = "home" | "eb5" | "process" | "management";
+export type BannerType = "home" | "eb5" | "process" | "management" | "adsa";
 
 export const useBanner = (type: BannerType = "home"): BannerData => {
   const banners: Record<BannerType, BannerData> = {
@@ -71,6 +71,20 @@ export const useBanner = (type: BannerType = "home"): BannerData => {
       secondaryButton: {
         label: "GET THE EB-5 PROCESS",
         href: "/eb-5-visa/eb-5-process",
+      },
+      backgroundImage: "/image/background3.png",
+    },
+    adsa: {
+      tagline: "WEALTH MANAGEMENT",
+      title: "Aggressive Daily Savings Account (ADSA)",
+      description: "The Winner’s Aggressive Daily Savings Account (ADSA) trademark of The Winners Regional Center. Start early, leverage compound interest, and own your future.",
+      primaryButton: {
+        label: "REQUEST EVALUATION",
+        href: "/request-evaluation",
+      },
+      secondaryButton: {
+        label: "REQUEST EVALUATION",
+        href: "/request-evaluation",
       },
       backgroundImage: "/image/background3.png",
     },

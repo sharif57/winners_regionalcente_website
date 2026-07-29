@@ -44,7 +44,14 @@ const navItems: NavItem[] = [
             { label: "Job Creator", href: "/eb-5-visa/job-creation" },
         ],
     },
-    { label: "Wealth Management", href: "/wealth-management" },
+    {
+        label: "Wealth Management",
+        href: "#",
+        dropdown: [
+            { label: "Wealth Management", href: "/wealth-management" },
+            { label: "ADSA", href: "/wealth-management/adsa" },
+        ],
+    },
     {
         label: "FAQ", href: "/faq",
         dropdown: [
