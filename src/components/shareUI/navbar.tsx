@@ -50,6 +50,7 @@ const navItems: NavItem[] = [
         dropdown: [
             { label: "Wealth Management", href: "/wealth-management" },
             { label: "ADSA", href: "/wealth-management/adsa" },
+            { label: "Jacobi Inspiration", href: "/wealth-management/jacobi-inspiration" },
         ],
     },
     {
