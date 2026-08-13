@@ -143,10 +143,10 @@ export default function ADSAPage() {
                   Retirement might seem a lifetime away, but right now, you possess the most powerful financial asset in the world: <strong className="text-secondary font-bold">Time</strong>.
                 </p>
                 <p>
-                  For young adults between <span className="text-primary font-bold">14 and 21</span>, the decisions made today with small amounts of money can completely redefine what your future looks like. You don't need a massive salary to build generational wealth—you just need consistency, strategy, and a head start.
+                  For young adults, decisions made today with small amounts of money can completely redefine what your future looks like. You don't need a massive salary to build generational wealth—you just need consistency, strategy, and a head start.
                 </p>
                 <p>
-                  This is what the innovative <strong className="text-secondary font-semibold">Aggressive Daily Savings Account (ADSA)</strong> trademark of The Winners Regional Center offers you.
+                  This is what the innovative <strong className="text-secondary font-semibold">Aggressive Daily Savings Account (ADSA)</strong> trademark of The Winners Regional Center offers you. Irrespective of your age or income, we have a secret about making it easy and affordable for you to create that plan that reduces the tension of thinking about the years with gray hair.
                 </p>
               </div>
             </div>
