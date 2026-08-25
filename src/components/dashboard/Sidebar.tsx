@@ -52,7 +52,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         try {
             setIsLoggingOut(true);
 
-            localStorage.removeItem("token");
+            localStorage.removeItem("accessToken");
             localStorage.removeItem("user");
 
 
