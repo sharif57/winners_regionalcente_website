@@ -42,14 +42,11 @@ export default function Page() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            //   "email": "vt-cV37LYgJzOnX@HnI.jjo",
-            //   "full_name": "string",
-            //   "message": "string",
             const data = {
                 full_name: fullName,
                 phone,
                 email,
-                message,
+                message: question,
             }
             const response = await sendEvaluationRequest(data).unwrap();
             toast.success(response?.message || "Evaluation request submitted successfully!");
@@ -75,7 +72,7 @@ export default function Page() {
                                     {message.split("\n\n").map((para, idx) => (
                                         <p key={idx} className="mb-4">{para}</p>
                                     ))}
-                                </div>
+                                </div> 
                             </div>
                         </div>
 

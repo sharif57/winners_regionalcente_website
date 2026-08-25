@@ -168,8 +168,7 @@ export default function LoginPage() {
                 >
                     {isLoading ? "Signing In..." : "Sign In"}
                 </Button>
-
-                {/* <p className="text-center text-[#696969] text-sm font-medium">
+                <p className="text-center text-[#696969] text-sm font-medium">
                     Don&lsquo;t have an account?{" "}
                     <Link
                         href="/auth/register"
@@ -177,7 +176,7 @@ export default function LoginPage() {
                     >
                         Sign Up
                     </Link>
-                </p> */}
+                </p> 
             </div>
         </div>
     );
