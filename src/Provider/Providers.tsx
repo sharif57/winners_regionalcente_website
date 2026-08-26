@@ -24,6 +24,8 @@ function AuthRouteGuard({ children }: { children: React.ReactNode }) {
   const isAuthRoute = useMemo(() => pathname?.startsWith("/auth") ?? false, [pathname]);
   const isDashboardRoute = useMemo(() => pathname?.startsWith("/dashboard") ?? false, [pathname]);
   const isArrangementRoute = useMemo(() => pathname?.startsWith("/arrangement") ?? false, [pathname]);
+  const isRequestEvaluationRoute = useMemo(() => pathname?.startsWith("/request-evaluation") ?? false, [pathname]);
+  const isProtectedRoute = isDashboardRoute || isArrangementRoute || isRequestEvaluationRoute;
 
   const { data: profileResponse, isLoading: isProfileLoading } = useUserProfileQuery(undefined, {
     skip: !token,
@@ -33,19 +35,15 @@ function AuthRouteGuard({ children }: { children: React.ReactNode }) {
     ? (profileResponse as { data?: { complete_profile?: boolean, role?: string } }).data 
     : null;
 
-  const isProfileComplete = Boolean(
-    profileData?.complete_profile || 
-    profileData?.role === "user" || 
-    profileData?.role === "admin"
-  );
+  const isProfileComplete = Boolean(profileData?.complete_profile);
 
   const shouldRedirectToArrangement = Boolean(token) && !isProfileLoading && !isProfileComplete && isDashboardRoute;
   const shouldRedirectToDashboard = Boolean(token) && !isProfileLoading && isProfileComplete && isArrangementRoute;
   const shouldRedirectFromAuth = Boolean(token) && !isProfileLoading && isAuthRoute;
-  const shouldRedirectToLogin = token === null && (isDashboardRoute || isArrangementRoute);
+  const shouldRedirectToLogin = token === null && isProtectedRoute;
   const shouldBlockWhileResolving =
-    (token === undefined && (isDashboardRoute || isArrangementRoute || isAuthRoute)) ||
-    (Boolean(token) && isProfileLoading && (isDashboardRoute || isArrangementRoute || isAuthRoute));
+    (token === undefined && (isProtectedRoute || isAuthRoute)) ||
+    (Boolean(token) && isProfileLoading && (isProtectedRoute || isAuthRoute));
 
   const shouldShowRouteGateLoader =
     shouldBlockWhileResolving ||
@@ -60,8 +58,8 @@ function AuthRouteGuard({ children }: { children: React.ReactNode }) {
     }
 
     if (!token) {
-      if (isDashboardRoute || isArrangementRoute) {
-        router.replace("/auth/login");
+      if (isProtectedRoute) {
+        router.replace(`/auth/login?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`);
       }
       return;
     }
@@ -91,6 +89,8 @@ function AuthRouteGuard({ children }: { children: React.ReactNode }) {
     isAuthRoute,
     isDashboardRoute,
     isArrangementRoute,
+    isRequestEvaluationRoute,
+    isProtectedRoute,
     router,
   ]);
 

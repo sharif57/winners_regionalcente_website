@@ -1,22 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/redux/feature/authSlice";
-import { useLazyUserProfileQuery } from "@/redux/feature/userSlice";
 
-export default function LoginPage() {
+function LoginForm() {
 
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const returnTo = searchParams.get("returnTo") || "/dashboard";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [login, { isLoading }] = useLoginMutation();
-    const [loadUserProfile] = useLazyUserProfileQuery();
 
     const getErrorMessage = (error: unknown) => {
         if (typeof error === "object" && error !== null && "data" in error) {
@@ -48,30 +48,15 @@ export default function LoginPage() {
             const res = await login({ email: trimmedEmail, password }).unwrap();
             const token = res?.data?.access;
 
-
             if (token) {
                 localStorage.setItem("accessToken", token);
             }
             toast.success(res?.message || "Login successful!");
-
-            try {
-                const profileResponse = await loadUserProfile(undefined).unwrap();
-                const isProfileComplete = Boolean(
-                    profileResponse &&
-                    typeof profileResponse === "object" &&
-                    "data" in profileResponse &&
-                    (profileResponse as { data?: { complete_profile?: boolean } }).data?.complete_profile
-                );
-
-                router.push(isProfileComplete ? "/dashboard" : "/arrangement");
-            } catch {
-                // Fallback route; global route guard will enforce the final destination.
-                router.push("/arrangement");
-            }
+            router.push(returnTo);
         } catch (error) {
             toast.error(getErrorMessage(error) || "Login failed. Please check your credentials.");
         }
-    }
+    };
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-right-10 duration-700">
@@ -115,6 +100,7 @@ export default function LoginPage() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                             placeholder="Email address"
                             className="w-full bg-white border-none px-6 py-4 text-sm focus:ring-1 focus:ring-[#F65353] transition-all outline-none"
                         />
@@ -130,6 +116,7 @@ export default function LoginPage() {
                                 type={showPassword ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                                 placeholder="Your password"
                                 className="w-full bg-white border-none px-6 py-4 text-sm focus:ring-1 focus:ring-[#F65353] transition-all outline-none pr-12"
                             />
@@ -168,7 +155,7 @@ export default function LoginPage() {
                 >
                     {isLoading ? "Signing In..." : "Sign In"}
                 </Button>
-                <p className="text-center text-[#696969] text-sm font-medium">
+                {/* <p className="text-center text-[#696969] text-sm font-medium">
                     Don&lsquo;t have an account?{" "}
                     <Link
                         href="/auth/register"
@@ -176,8 +163,16 @@ export default function LoginPage() {
                     >
                         Sign Up
                     </Link>
-                </p> 
+                </p>  */}
             </div>
         </div>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense>
+            <LoginForm />
+        </Suspense>
     );
 }

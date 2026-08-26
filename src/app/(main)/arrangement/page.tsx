@@ -50,18 +50,16 @@ export default function Arrangement() {
 
     const arrangementProgress = arrangementProgressResponse?.data as ArrangementProgressData | undefined;
 
-    const handleDownload = async (fileUrl: string, fileName: string) => {
+    const handleDownload = (fileUrl: string, fileName: string) => {
         try {
             setDownloadingId(1);
-            const response = await fetch(fileUrl);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
-            a.href = url;
+            a.href = fileUrl;
             a.download = fileName;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
             document.body.appendChild(a);
             a.click();
-            window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         } catch (error) {
             console.error("Download failed:", error);
