@@ -154,6 +154,10 @@ export default function Arrangement() {
             return "bg-[#FDECEC] text-[#F65353] border-[#F65353]";
         }
 
+        if (normalizedStatus === "submitted") {
+            return "bg-[#FFF8E6] text-[#D97706] border-[#D97706]";
+        }
+
         return "bg-[#F5F6FA] text-[#696969] border-[#BABABA]";
     };
 
@@ -310,9 +314,9 @@ export default function Arrangement() {
                                                         {arrangementProgress.current_document.download_file.split('.').pop()?.toUpperCase()}
                                                     </span>
                                                     <span className="text-gray-400 mx-1">•</span>
-                                                    <span className="text-gray-600">12MB</span>
+                                                    <span className="text-gray-600">File</span>
                                                 </p>
-                                            </div>
+                                            </div> 
 
                                             {/* Download and Upload Buttons */}
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
